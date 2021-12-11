@@ -1,5 +1,6 @@
 import "./App.css";
 import styled from "styled-components";
+import GlobalFonts from "./media/fonts";
 import ButtonsLayout from "./components/buttons/ButtonsLayout";
 import Container from "./components/Container";
 import Display from "./components/display/Display";
@@ -13,6 +14,7 @@ const StyledApp = styled.div`
 function App() {
   return (
     <StyledApp className="App">
+      <GlobalFonts />
       <Container>
         <Logo />
         <Display />
