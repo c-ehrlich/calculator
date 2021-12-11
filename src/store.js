@@ -6,7 +6,7 @@ let useStore = (set) => ({
   powerOn: () => set((state) => ({ power: true })),
   powerOff: () => set((state) => ({ power: false })),
 
-  display: "0",
+  display: "1234.5678",
   setDisplay: (display) => set((state) => ({ display: display })),
 });
 
