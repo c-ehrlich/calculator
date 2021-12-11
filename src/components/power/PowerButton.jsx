@@ -11,31 +11,27 @@ import useStore from "../../store";
 // `;
 
 const PowerButtonArea = styled.div`
-  background-color: yellow;
   display: flex;
+  width: 48px;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-`;
-
-const PowerButtonSmallDot = styled.div`
-  width: 5px;
-  height: 5px;
-  color: white;
-  background-color: white;
-  border-radius: 50%;
+  gap: 16px;
 `;
 
 const PowerButtonBigDot = styled.div`
-  width: 10px;
-  height: 10px;
-  border: 4px solid white;
+  width: 6px;
+  height: 6px;
+  border: 2px solid white;
   border-radius: 50%;
   background-color: ${(props) =>
     props.onoff === "on" ? "white" : "transparent"};
 `;
 
 const StyledPowerButton = styled.button`
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
   background-color: ${(props) => (props.onoff === "on" ? "green" : "red")};
 `;
 
@@ -48,10 +44,7 @@ const PowerButton = ({ onoff }) => {
       <StyledPowerButton
         onClick={onoff === "on" ? powerOn : powerOff}
         onoff={onoff}
-      >
-        {onoff}
-      </StyledPowerButton>
-      <PowerButtonSmallDot />
+      />
       <PowerButtonBigDot onoff={onoff} />
     </PowerButtonArea>
   );

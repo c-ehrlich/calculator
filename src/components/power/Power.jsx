@@ -5,9 +5,9 @@ import useStore from "../../store";
 import PowerButton from "./PowerButton";
 
 const StyledPowerContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  background-color: green;
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  gap: 16px;
 `;
 
 const Power = (props) => {
