@@ -6,7 +6,7 @@ import PowerButton from "./PowerButton";
 
 const StyledPowerContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 48px);
+  grid-template-columns: repeat(2, 48px);
   gap: 16px;
 `;
 
@@ -16,7 +16,6 @@ const Power = (props) => {
     <StyledPowerContainer>
       <PowerButton onoff="on" />
       <PowerButton onoff="off" />
-      <div>{power ? "on" : "off"}</div>
     </StyledPowerContainer>
   );
 };

@@ -32,7 +32,9 @@ const StyledPowerButton = styled.button`
   height: 24px;
   border: none;
   border-radius: 50%;
+  cursor: pointer;
   background-color: ${(props) => (props.onoff === "on" ? "green" : "red")};
+  box-shadow: inset 0 3px 3px -2px white, 0 3px 13px 0px black;
 `;
 
 const PowerButton = ({ onoff }) => {
