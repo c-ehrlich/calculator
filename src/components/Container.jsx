@@ -14,18 +14,18 @@ const StyledContainer = styled.div`
 const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 32px;
 
   ${'' /* created with https://www.cssmatic.com/noise-texture */}
   background-image: url(${bg});
   background-repeat: repeat;
 
   border: 6px outset rgba(0, 0, 0, 0.4);
-  padding: 2rem 1.5rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  border-bottom-left-radius: 3rem;
-  border-bottom-right-radius: 3rem;
+  padding: 48px 32px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 48px;
+  border-bottom-right-radius: 48px;
 `;
 
 const Container = (props) => {
