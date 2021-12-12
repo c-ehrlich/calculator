@@ -3,6 +3,7 @@ body {
   padding: 0px;
   height: 100vh;
   background-color: yellow;
+  user-select: none;
 }
 
 #root {
