@@ -20,6 +20,14 @@ const StyledButtonsLayout = styled.div`
   gap: 16px;
 `;
 
+const WhiteDot = styled.div`
+  width: 6px;
+  height: 6px;
+  border: none;
+  background-color: white;
+  border-radius: 50%;
+`;
+
 const ButtonsLayout = () => {
   return (
     <StyledButtonsLayout>
@@ -84,7 +92,7 @@ const ButtonsLayout = () => {
         0
       </Button>
       {/* TODO put a circular div in here instead */}
-      <Button type="brown">.</Button>
+      <Button type="brown"><WhiteDot /></Button>
       <Button type="yellow" passDownId="equals">
         <FontAwesomeIcon icon={faEquals} />
       </Button>
