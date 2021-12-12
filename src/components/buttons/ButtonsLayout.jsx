@@ -31,7 +31,7 @@ const WhiteDot = styled.div`
 const ButtonsLayout = () => {
   return (
     <StyledButtonsLayout>
-      <Button type="green">M+</Button>
+      <Button type="green"><span>M +</span></Button>
       <Button type="green">M –</Button>
       <Button type="green">MR</Button>
       <Button type="green" id="mc">
@@ -71,7 +71,7 @@ const ButtonsLayout = () => {
         <FontAwesomeIcon icon={faTimes} />
       </Button>
       <Button type="brown" passDownId="clear">
-        CE
+        <span>X<sup>-1</sup></span>
       </Button>
       <Button type="black" passDownId="one">
         1
@@ -86,7 +86,8 @@ const ButtonsLayout = () => {
         <FontAwesomeIcon icon={faMinus} />
       </Button>
       <Button type="brown" passDownId="clear-current">
-        C
+        <span>CE</span>
+        <span>C</span>
       </Button>
       <Button type="black" passDownId="zero">
         0
