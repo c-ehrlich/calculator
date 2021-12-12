@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import useStore from "../store";
 
-import logo from "../media/BraunLogo.svg";
+import braunLogo from "../media/BraunLogo.svg";
+import reactLogo from "../media/ReactLogo.svg";
 
 const StyledLogo = styled.div`
   margin-bottom: -8px;
@@ -13,9 +15,11 @@ const LogoImage = styled.img`
 `;
 
 const Logo = () => {
+  const power = useStore((state) => state.power);
+
   return (
     <StyledLogo>
-      <LogoImage src={logo} alt="Braun Logo" />
+      <LogoImage src={power ? reactLogo : braunLogo} alt="Logo" />
     </StyledLogo>
   );
 };
