@@ -4,6 +4,7 @@ import styled from "styled-components";
 import logo from "../media/BraunLogo.svg";
 
 const StyledLogo = styled.div`
+  margin-bottom: -8px;
 `;
 
 const LogoImage = styled.img`
