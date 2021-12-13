@@ -79,7 +79,7 @@ const ModeToggle = () => {
     <>
       <VerticalSwitch type="checkbox" id="check" />
       <VerticalSwitchLabel
-        for="check"
+        htmlFor="check"
         className={sciMode && "checked"}
         onClick={sciMode ? sciModeOff : sciModeOn}
       >
