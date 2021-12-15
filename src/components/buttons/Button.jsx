@@ -46,7 +46,7 @@ const Button = (props) => {
     <StyledButton
       id={props.passDownId}
       type={props.type}
-      onClick={() => console.log(props.passDownId)}
+      onClick={props.clickFn && props.clickFn}
     >
       {props.children}
     </StyledButton>
