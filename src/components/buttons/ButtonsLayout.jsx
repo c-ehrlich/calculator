@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDivide,
-  faEquals,
+  // faEquals,
   faMinus,
   faPercent,
   faPlus,
@@ -20,13 +20,13 @@ const StyledButtonsLayout = styled.div`
   gap: 16px;
 `;
 
-const WhiteDot = styled.div`
-  width: 6px;
-  height: 6px;
-  border: none;
-  background-color: white;
-  border-radius: 50%;
-`;
+// const WhiteDot = styled.div`
+//   width: 6px;
+//   height: 6px;
+//   border: none;
+//   background-color: white;
+//   border-radius: 50%;
+// `;
 
 const ButtonsLayout = () => {
   return (
@@ -93,11 +93,15 @@ const ButtonsLayout = () => {
         0
       </Button>
       {/* TODO put a circular div in here instead */}
-      <Button type="brown"><WhiteDot /></Button>
-      <Button type="yellow" passDownId="equals">
-        <FontAwesomeIcon icon={faEquals} />
+      <Button type="brown" passDownId="decimal">
+        .
+        {/* <WhiteDot /> */}
       </Button>
-      <Button type="brown" passDownId="add">
+      <Button type="yellow" passDownId="equals">
+        {/* <FontAwesomeIcon icon={faEquals} /> */}
+        =
+      </Button>
+      <Button type="brown" passDownId="add" onClick={() => console.log("add")}>
         <FontAwesomeIcon icon={faPlus} />
       </Button>
     </StyledButtonsLayout>
