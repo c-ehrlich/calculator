@@ -1,19 +1,6 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
-const inputGetCurrentDigitCount = (num) => {
-  const split = num.split(".");
-  return split[0].length + split[1].length;
-};
-
-const digitCountAfterDecimal = (num) => {
-  return num.split(".")[1].length;
-};
-
-const isWhole = (num) => {
-  return num % 1 === 0 ? true : false;
-};
-
 let useStore = (set) => ({
   /*
    * LOGIC
