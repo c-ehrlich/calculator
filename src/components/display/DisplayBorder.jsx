@@ -39,6 +39,9 @@ const DisplayInner = styled.div`
 
   transition: 0.1s ease-in;
 
+  display: flex;
+  justify-content: space-between;
+
   &.power {
     background-color: rgb(200, 214, 183);
   }
