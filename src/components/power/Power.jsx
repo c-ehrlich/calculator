@@ -14,8 +14,8 @@ const Power = (props) => {
   const power = useStore(state => state.power)
   return (
     <StyledPowerContainer>
-      <PowerButton onoff="on" />
-      <PowerButton onoff="off" />
+      <PowerButton onoff={true} power={power} />
+      <PowerButton onoff={false} power={power} />
     </StyledPowerContainer>
   );
 };

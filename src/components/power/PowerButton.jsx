@@ -1,4 +1,3 @@
-import zustand from "zustand";
 import styled from "styled-components";
 import useStore from "../../store";
 
@@ -24,7 +23,7 @@ const PowerButtonBigDot = styled.div`
   border: 2px solid white;
   border-radius: 50%;
   background-color: ${(props) =>
-    props.onoff === "on" ? "white" : "transparent"};
+    props.onoff ? "white" : "transparent"};
 `;
 
 const StyledPowerButton = styled.button`
@@ -33,7 +32,7 @@ const StyledPowerButton = styled.button`
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  background-color: ${(props) => (props.onoff === "on" ? "green" : "red")};
+  background-color: ${(props) => (props.onoff ? "green" : "red")};
   box-shadow: inset 0 3px 3px -2px white, 0 3px 13px 0px black;
 `;
 
@@ -44,7 +43,7 @@ const PowerButton = ({ onoff }) => {
   return (
     <PowerButtonArea>
       <StyledPowerButton
-        onClick={onoff === "on" ? powerOn : powerOff}
+        onClick={onoff ? powerOn : powerOff}
         onoff={onoff}
       />
       <PowerButtonBigDot onoff={onoff} />
