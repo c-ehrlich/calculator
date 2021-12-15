@@ -3,9 +3,9 @@ import { devtools } from "zustand/middleware";
 
 // allows us to calculate number of
 const countDecimals = (number) => {
-  console.log("number: ")
-  console.log(number)
-  console.log(typeof number)
+  console.log("number: ");
+  console.log(number);
+  console.log(typeof number);
   if (!number.toString().includes(".")) return 0;
   return Number(number.toString().split(".")[1].length);
 };
@@ -15,11 +15,9 @@ const handleInputNum = ({ num, inputNum, lastInput }) => {
   const inputNumNumber = Number(inputNum);
   console.log("inputNumNumber: " + inputNumNumber);
   if (inputNumNumber === 0) return num.toString();
-  if (lastInput === "decimal") return "" + inputNum + "." + num;
+  if (inputNum[inputNum.length-1] === ".") return inputNum + num;
   if (inputNum.includes(".")) {
-    return countDecimals(inputNumNumber) < 4
-      ? inputNum + num
-      : inputNum;
+    return countDecimals(inputNumNumber) < 4 ? inputNum + num : inputNum;
   }
 
   return inputNum + num;
@@ -113,8 +111,8 @@ let useStore = (set) => ({
     set((state) => ({
       displayLeftSide: "",
       currentCalculation:
-        state.lastInput === "clear" ? null : state.currentCalculation,
-      inputNum: state.lastInput === "clear" ? null : 0,
+        state.lastInput === "clear" ? "0" : state.currentCalculation,
+      inputNum: "0",
       lastInput: "clear",
     }));
   },
@@ -140,6 +138,7 @@ let useStore = (set) => ({
   inputDecimal: () => {
     set((state) => ({
       inputNum: decideWhetherOrNotToAddDecimal(state.inputNum),
+      lastInput: "decimal",
     }));
   },
 
@@ -147,20 +146,24 @@ let useStore = (set) => ({
    * ARITHMETIC
    */
   inputPlus: () => {
-    set({ displayLeftSide: "+" });
+    set({ displayLeftSide: "+", lastInput: "plus" });
   },
   inputMinus: () => {
-    set({ displayLeftSide: "-" });
+    set({ displayLeftSide: "-", lastInput: "minus" });
   },
   inputTimes: () => {
-    set({ displayLeftSide: "x" });
+    set({ displayLeftSide: "x", lastInput: "times" });
   },
   inputDivideBy: () => {
     set((state) =>
       state.sciMode
-        ? { sciModeEvalString: state.sciModeEvalString + "/" }
+        ? {
+            sciModeEvalString: state.sciModeEvalString + "/",
+            lastInput: "divideBy",
+          }
         : {
             displayLeftSide: "/",
+            lastInput: "divideBy",
           }
     );
   },
@@ -170,21 +173,21 @@ let useStore = (set) => ({
    */
   inputSqrt: (state) => {
     state.inputNum != null
-      ? set({ inputNum: Math.sqrt(state.inputNum) })
-      : set({ currentCalc: Math.sqrt(state.currentCalc) });
+      ? set({ inputNum: Math.sqrt(state.inputNum), lastInput: "sqrt" })
+      : set({ currentCalc: Math.sqrt(state.currentCalc), lastInput: "sqrt" });
   },
   inputPercent: (state) => {
     state.inputNum != null
-      ? set({ inputNum: state.inputNum / 100 })
-      : set({ currentCalc: state.currentCalc / 100 });
+      ? set({ inputNum: state.inputNum / 100, lastInput: "percent" })
+      : set({ currentCalc: state.currentCalc / 100, lastInput: "percent" });
   },
   inputInverse: (state) => {
     state.inputNum != null
-      ? set({ inputNum: 1 / state.inputNum })
-      : set({ currentCalc: 1 / state.currentCalc });
+      ? set({ inputNum: 1 / state.inputNum, lastInput: "inverse" })
+      : set({ currentCalc: 1 / state.currentCalc, lastInput: "inverse" });
   },
   inputNegative: (state) => {
-    console.log("negative");
+    set({ lastInput: "negative" });
   },
 
   /*
@@ -193,6 +196,7 @@ let useStore = (set) => ({
   inputEquals: () => {
     set({
       displayLeftSide: "",
+      lastInput: "equals",
     });
   },
 
@@ -200,11 +204,17 @@ let useStore = (set) => ({
    * MEMORY FUNCTIONS
    */
   memory: 0,
-  inputMPlus: (state) => set({ memory: state.memory + state.inputNum }),
-  inputMMinus: (state) => set({ memory: state.memory - state.inputNum }),
+  inputMPlus: (state) =>
+    set({ memory: state.memory + state.inputNum, lastInput: "mplus" }),
+  inputMMinus: (state) =>
+    set({ memory: state.memory - state.inputNum, lastInput: "mminus" }),
   inputMRecall: (state) =>
-    set({ inputNum: state.memory, display: state.memory }),
-  inputMClear: () => set({ memory: 0 }),
+    set({
+      inputNum: state.memory,
+      display: state.memory,
+      lastInput: "mrecall",
+    }),
+  inputMClear: () => set({ memory: 0, lastInput: "mclear" }),
 });
 
 useStore = devtools(useStore); // TEMP - remove in prod
