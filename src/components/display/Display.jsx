@@ -28,25 +28,27 @@ const Display = () => {
   const displayLeftSide = useStore((state) => state.displayLeftSide);
 
   const currentCalc = useStore((state) => state.currentCalc);
-  const currentInputNum = useStore((state) => state.currentInputNum);
+  const inputNum = useStore((state) => state.inputNum);
   const calcError = useStore((state) => state.calcError);
 
   const displayString = useMemo(() => {
     console.log("displayString");
     console.log("currentCalc: " + currentCalc);
-    console.log("currentInputNum: " + currentInputNum);
+    console.log("inputNum: " + inputNum);
     console.log("calcError: " + calcError);
     if (calcError) return "ERR"
-    if (currentInputNum === null && currentCalc === null) return 0;
-    if (currentInputNum === null) return currentCalc;
-    return truncateNumberForDisplay(currentInputNum)
-  }, [currentCalc, currentInputNum, calcError]);
+    if (inputNum === 0 && currentCalc === 0) return 0;
+    if (inputNum === 0) return currentCalc;
+    return truncateNumberForDisplay(inputNum)
+  }, [currentCalc, inputNum, calcError]);
 
   return (
     <DisplayBorder>
       <DisplayText className={power && "power"}>{displayLeftSide}</DisplayText>
       <DisplayText id="display" className={power && "power"}>
-        {displayString}
+        {inputNum}
+        {/* TODO using inputNum for now for debugging, but switch back to inputString soon */}
+        {/* {displayString} */}
       </DisplayText>
     </DisplayBorder>
   );
