@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import styled from "styled-components";
 import useStore from "../../store";
 

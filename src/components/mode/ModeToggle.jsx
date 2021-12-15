@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import useStore from "../../store";
 
@@ -17,7 +16,6 @@ const VerticalSwitchLabel = styled.label`
   border: 1px solid #000;
   border-radius: 12px;
   background: #333;
-  ${"" /* box-shadow: inset 0 -30px 15px -3px #f4eae2; */}
 
   cursor: pointer;
 
@@ -26,18 +24,11 @@ const VerticalSwitchLabel = styled.label`
     display: block;
     width: 23px;
     height: 50px;
-    ${"" /* border: 1px solid #111111; */}
     border-radius: 11px;
     background: #2c2e2c;
     box-shadow: inset 0 2px 5px 1px black;
     content: "";
     transition: background-position 0.05s ease-in-out;
-  }
-
-  ${
-    "" /* &.checked:before {
-    background-position: 0 200px;
-  } */
   }
 `;
 

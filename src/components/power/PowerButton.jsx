@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import useStore from "../../store";
 
-// const PowerOnButton = styled.StyledPowerButton`
-//   background-color: green;
-// `;
-
-// const PowerOffButton = styled.StyledPowerButton`
-//   background-color: red;
-// `;
-
 const PowerButtonArea = styled.div`
   display: flex;
   width: 48px;
