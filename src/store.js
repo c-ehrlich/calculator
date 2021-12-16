@@ -218,16 +218,15 @@ let useStore = (set) => ({
    * Memory Functions
    */
   memory: 0,
-  inputMPlus: (state) =>
-    set({ memory: state.memory + state.inputNum, lastInput: "mplus" }),
-  inputMMinus: (state) =>
-    set({ memory: state.memory - state.inputNum, lastInput: "mminus" }),
-  inputMRecall: (state) =>
-    set({
+  inputMPlus: () =>
+    set((state) => ({ memory: state.memory + Number(state.inputNum), lastInput: "mplus" })),
+  inputMMinus: () =>
+    set((state) => ({ memory: state.memory - Number(state.inputNum), lastInput: "mminus" })),
+  inputMRecall: () =>
+    set((state) => ({
       inputNum: state.memory,
-      display: state.memory,
       lastInput: "mrecall",
-    }),
+    })),
   inputMClear: () => set({ memory: 0, lastInput: "mclear" }),
 
   /*
