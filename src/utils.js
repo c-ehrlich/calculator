@@ -40,10 +40,10 @@ export const handleInputNum = ({ num, inputNum, lastInput }) => {
  */
  export const processNumberForDisplay = (inputNumString) => {
   let num = inputNumString.toString().split(".")[0];
-  let decimal = inputNumString.toString().split(".")[1];
+  let decimal = inputNumString.toString().split(".")[1] || "";
   if (num.length > 8) return "ERR";
-  decimal = decimal.slice(0, 8 - num.length).replace(/0+$/g, '');
   if (decimal === "") return num;
+  decimal = decimal.slice(0, 8 - num.length).replace(/0+$/g, '');
   return num + "." + decimal;
 }
 
@@ -71,6 +71,13 @@ export const safeEval = (inputExpression) => {
     console.log(e);
     return "ERR";
   }
+}
+
+export const squareRootCalculation = (inputNumString) => {
+  const num = Number(inputNumString);
+  if (num < 0) return "ERR";
+  const sqrt = Math.sqrt(num);
+  return processNumberForDisplay(sqrt);
 }
 
 /**

@@ -6,6 +6,7 @@ import {
   handleInputNum,
   processNumberForDisplay,
   safeEval,
+  squareRootCalculation,
   toggleNegative,
 } from "./utils";
 
@@ -158,17 +159,30 @@ let useStore = (set) => ({
   /*
    * In Place Calculations
    */
-  inputSqrt: (state) => {
-    state.inputNum !== ("" && "0")
-      ? set({ inputNum: Math.sqrt(state.inputNum), lastInput: "sqrt" })
-      : set({ currentCalc: Math.sqrt(state.currentCalc), lastInput: "sqrt" });
+  inputSqrt: () => {
+    set((state) => ({
+      inputNum:
+        state.inputNum !== ("" && "0")
+          ? squareRootCalculation(state.inputNum)
+          : state.inputNum,
+      currentCalc:
+        state.inputNum === ("" && "0")
+          ? squareRootCalculation(state.inputNum)
+          : state.inputNum,
+      lastInput: "sqrt" // maybe do this only if it was successful?
+    }));
+    // state.inputNum !== ("" && "0")
+    //   ? set({ inputNum: Math.sqrt(state.inputNum), lastInput: "sqrt" })
+    //   : set({ currentCalc: Math.sqrt(state.currentCalc), lastInput: "sqrt" });
   },
+  // !!! this use of state is wrong
   inputPercent: (state) => {
     state.inputNum !== ("" && "0")
       ? set({ inputNum: state.inputNum / 100, lastInput: "percent" })
       : set({ currentCalc: state.currentCalc / 100, lastInput: "percent" });
   },
-  inputInverse: (state) => {
+  // !!! this use of state is wrong
+  inputInverse: () => {
     set((state) =>
       state.inputNum !== ("" && "0")
         ? {
