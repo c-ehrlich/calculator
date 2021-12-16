@@ -15,9 +15,10 @@ export const decideWhetherOrNotToAddDecimal = (num) => {
 
 // handle what happens when a number is input
 export const handleInputNum = ({ num, inputNum, lastInput }) => {
+  console.log("in handleInputNum - inputNum: " + inputNum + typeof inputNum + ", num: " + num + typeof num);
   const inputNumNumber = Number(inputNum);
   console.log("inputNumNumber: " + inputNumNumber);
-  if (inputNumNumber === 0) return num.toString();
+  if (inputNum === "0") return num.toString();
   if (inputNumNumber >= 10000000) return inputNum;
   if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
   if (inputNum.includes(".")) {

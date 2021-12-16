@@ -65,8 +65,8 @@ let useStore = (set) => ({
   sciMode: false,
   sciModeOn: () => {
     set({
-      currentCalc: 0,
-      inputNum: 0,
+      currentCalc: "0",
+      inputNum: "0",
       displayLeftSide: "",
       sciMode: true,
       sciModeEvalString: "",
@@ -74,8 +74,8 @@ let useStore = (set) => ({
   },
   sciModeOff: () => {
     set({
-      currentCalc: 0,
-      inputNum: 0,
+      currentCalc: "0",
+      inputNum: "0",
       displayLeftSide: "",
       sciMode: false,
       sciModeEvalString: "",
@@ -242,7 +242,7 @@ let useStore = (set) => ({
   sciEvalString: "",
   sciInputPlus: () =>
     set((state) => ({
-      sciEvalString: state.sciEvalString + state.inputNum + "+",
+      sciEvalString: (state.sciEvalString !== "0" ? state.sciEvalString : "") + state.inputNum + "+",
       inputNum: "",
       lastInput: "plus",
     })),
@@ -260,15 +260,15 @@ let useStore = (set) => ({
     })),
   sciInputDivideBy: () =>
     set((state) => ({
-      sciEvalString: state.sciEvalString + state.inputNum + "/",
+      sciEvalString: (state.sciEvalString !== "0" ? state.sciEvalString : "") + state.inputNum + "/",
       inputNum: "",
       lastInput: "divideby",
     })),
   sciInputEquals: () =>
     set((state) => ({
-      sciEvalString: state.sciEvalString + state.inputNum,
-      inputNum: "",
       sciResult: safeEval(state.sciEvalString + state.inputNum),
+      sciEvalString: "0",
+      inputNum: "",
       lastInput: "equals",
     })),
 });
