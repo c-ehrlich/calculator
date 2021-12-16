@@ -1,34 +1,13 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { safeEval, toggleNegative } from "./utils";
-
-// allows us to calculate number of
-const countDecimals = (number) => {
-  console.log("number: ");
-  console.log(number);
-  console.log(typeof number);
-  if (!number.toString().includes(".")) return 0;
-  return Number(number.toString().split(".")[1].length);
-};
-
-// handle what happens when a number is input
-const handleInputNum = ({ num, inputNum, lastInput }) => {
-  const inputNumNumber = Number(inputNum);
-  console.log("inputNumNumber: " + inputNumNumber);
-  if (inputNumNumber === 0) return num.toString();
-  if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
-  if (inputNum.includes(".")) {
-    return countDecimals(inputNumNumber) < 4 ? inputNum + num : inputNum;
-  }
-
-  return inputNum + num;
-};
-
-const decideWhetherOrNotToAddDecimal = (num) => {
-  console.log(typeof num);
-  return num.toString().includes(".") ? num : num + ".";
-};
+import {
+  decideWhetherOrNotToAddDecimal,
+  handleInputNum,
+  processNumberForDisplay,
+  safeEval,
+  toggleNegative,
+} from "./utils";
 
 let useStore = (set) => ({
   /*
@@ -77,7 +56,7 @@ let useStore = (set) => ({
    */
   displayLeftSide: "",
   setdisplayLeftSide: (displayLeftSide) =>
-    set((state) => ({ displayLeftSide: displayLeftSide })),
+    set({ displayLeftSide: displayLeftSide }),
 
   /*
    * SCIENTIFIC MODE
@@ -190,21 +169,26 @@ let useStore = (set) => ({
       : set({ currentCalc: state.currentCalc / 100, lastInput: "percent" });
   },
   inputInverse: (state) => {
-    state.inputNum !== ("" && "0")
-      ? set({ inputNum: 1 / state.inputNum, lastInput: "inverse" })
-      : set({ currentCalc: 1 / state.currentCalc, lastInput: "inverse" });
+    set((state) =>
+      state.inputNum !== ("" && "0")
+        ? {
+            inputNum: processNumberForDisplay(1 / state.inputNum),
+            lastInput: "inverse",
+          }
+        : {
+            currentCalc: processNumberForDisplay(1 / state.currentCalc),
+            lastInput: "inverse",
+          }
+    );
   },
   inputNegative: () => {
-    // state.inputNum !== ("" && "0")
-    //   && set({ inputNum: state.inputNum, lastInput: "negative" });
-    set((state) => (
-      state.inputNum !== ("" && "0")
-        && ({
-          inputNum: toggleNegative(state.inputNum),
-        })
-    ))
+    set(
+      (state) =>
+        state.inputNum !== ("" && "0") && {
+          inputNum: processNumberForDisplay(toggleNegative(state.inputNum)),
+        }
+    );
   },
-  
 
   /*
    * Equals
