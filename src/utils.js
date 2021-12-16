@@ -40,10 +40,11 @@ export const handleInputNum = ({ num, inputNum, lastInput }) => {
  */
  export const processNumberForDisplay = (inputNumString) => {
   let num = inputNumString.toString().split(".")[0];
+  const negativeModifier = num < 0 ? -1 : 0;
   let decimal = inputNumString.toString().split(".")[1] || "";
-  if (num.length > 8) return "ERR";
+  if (num.length + negativeModifier > 8) return "ERR";
   if (decimal === "") return num;
-  decimal = decimal.slice(0, 8 - num.length).replace(/0+$/g, '');
+  decimal = decimal.slice(0, 9 - (num.length + negativeModifier)).replace(/0+$/g, '');
   return num + "." + decimal;
 }
 
