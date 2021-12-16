@@ -3,7 +3,7 @@ import useStore from "../../store";
 import styled from "styled-components";
 import DisplayBorder from "./DisplayBorder";
 
-const DisplayText = styled.span`
+const DisplayMainText = styled.span`
   margin: 0;
   padding: 0;
   color: rgb(106, 117, 93);
@@ -17,15 +17,28 @@ const DisplayText = styled.span`
   }
 `;
 
-const truncateNumberForDisplay = (num) => {
-  // TODO truncate numbers for display
-  return num;
-};
+const DisplaySmallText = styled.span`
+  margin: 0;
+  padding: 0;
+  font-family: "D7Mono";
+  color: rgb(106, 117, 93);
+  font-size: 14px;
+  height: 14px;
+`;
+
+const DisplayLeft = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 2px 0;
+`;
 
 const Display = () => {
   const power = useStore((state) => state.power);
   // const display = useStore((state) => state.display); // see if we can do it without this
   const displayLeftSide = useStore((state) => state.displayLeftSide);
+  const memory = useStore((state) => state.memory);
 
   const currentCalc = useStore((state) => state.currentCalc);
   const inputNum = useStore((state) => state.inputNum);
@@ -39,17 +52,20 @@ const Display = () => {
     if (calcError) return "ERR"
     if (inputNum === 0 && currentCalc === 0) return 0;
     if (inputNum === 0) return currentCalc;
-    return truncateNumberForDisplay(inputNum)
+    // return truncateNumberForDisplay(inputNum)
   }, [currentCalc, inputNum, calcError]);
 
   return (
     <DisplayBorder>
-      <DisplayText className={power && "power"}>{displayLeftSide}</DisplayText>
-      <DisplayText id="display" className={power && "power"}>
+      <DisplayLeft>
+        <DisplaySmallText className={power && "power"}>{displayLeftSide}</DisplaySmallText>
+        <DisplaySmallText className={memory === 0 && "hidden"}>{memory !== 0 && "M"}</DisplaySmallText>
+      </DisplayLeft>
+      <DisplayMainText id="display" className={power && "power"}>
         {inputNum}
         {/* TODO using inputNum for now for debugging, but switch back to inputString soon */}
         {/* {displayString} */}
-      </DisplayText>
+      </DisplayMainText>
     </DisplayBorder>
   );
 };
