@@ -1,6 +1,8 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
+import { safeEval } from "./utils";
+
 // allows us to calculate number of
 const countDecimals = (number) => {
   console.log("number: ");
@@ -15,7 +17,7 @@ const handleInputNum = ({ num, inputNum, lastInput }) => {
   const inputNumNumber = Number(inputNum);
   console.log("inputNumNumber: " + inputNumNumber);
   if (inputNumNumber === 0) return num.toString();
-  if (inputNum[inputNum.length-1] === ".") return inputNum + num;
+  if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
   if (inputNum.includes(".")) {
     return countDecimals(inputNumNumber) < 4 ? inputNum + num : inputNum;
   }
@@ -73,8 +75,6 @@ let useStore = (set) => ({
    * Maybe we can get rid of these and instead just have a function in
    * Display.jsx that uses the other values to decide what to display?
    */
-  // display: "0",
-  // setDisplay: (display) => set((state) => ({ display: display })),
   displayLeftSide: "",
   setdisplayLeftSide: (displayLeftSide) =>
     set((state) => ({ displayLeftSide: displayLeftSide })),
@@ -105,20 +105,28 @@ let useStore = (set) => ({
   sciModeEvalString: "",
 
   /*
-   * CE/C BUTTON
+   *
+   * CALCULATOR BUTTONS - REGULAR MODE
+   *
+   */
+
+  /*
+   * CE/C Button
    */
   inputClear: () => {
     set((state) => ({
       displayLeftSide: "",
       currentCalculation:
         state.lastInput === "clear" ? "0" : state.currentCalculation,
+      sciEvalString:
+        state.lastInput === ("clear" && "equals") ? "0" : state.sciEvalString,
       inputNum: "0",
       lastInput: "clear",
     }));
   },
 
   /*
-   * NUMBER INPUT
+   * Number Input
    */
   inputNumber: (number) => {
     console.log("inputNumber " + number);
@@ -169,7 +177,7 @@ let useStore = (set) => ({
   },
 
   /*
-   * IN PLACE CALCULATIONS
+   * In Place Calculations
    */
   inputSqrt: (state) => {
     state.inputNum != null
@@ -191,7 +199,7 @@ let useStore = (set) => ({
   },
 
   /*
-   * EQUALS
+   * Equals
    */
   inputEquals: () => {
     set({
@@ -201,7 +209,7 @@ let useStore = (set) => ({
   },
 
   /*
-   * MEMORY FUNCTIONS
+   * Memory Functions
    */
   memory: 0,
   inputMPlus: (state) =>
@@ -215,6 +223,49 @@ let useStore = (set) => ({
       lastInput: "mrecall",
     }),
   inputMClear: () => set({ memory: 0, lastInput: "mclear" }),
+
+  /*
+   *
+   * CALCULATOR BUTTONS - SCIENTIFIC MODE
+   *
+   */
+
+  /*
+   * Number Input
+   */
+  sciResult: "",
+  sciEvalString: "",
+  sciInputPlus: () =>
+    set((state) => ({
+      sciEvalString: state.sciEvalString + state.inputNum + "+",
+      inputNum: "",
+      lastInput: "plus",
+    })),
+  sciInputMinus: () =>
+    set((state) => ({
+      sciEvalString: state.sciEvalString + state.inputNum + "-",
+      inputNum: "",
+      lastInput: "minus",
+    })),
+  sciInputTimes: () =>
+    set((state) => ({
+      sciEvalString: state.sciEvalString + state.inputNum + "*",
+      inputNum: "",
+      lastInput: "times",
+    })),
+  sciInputDivideBy: () =>
+    set((state) => ({
+      sciEvalString: state.sciEvalString + state.inputNum + "/",
+      inputNum: "",
+      lastInput: "divideby",
+    })),
+  sciInputEquals: () =>
+    set((state) => ({
+      sciEvalString: state.sciEvalString + state.inputNum,
+      inputNum: "",
+      sciResult: safeEval(state.sciEvalString + state.inputNum),
+      lastInput: "equals",
+    })),
 });
 
 useStore = devtools(useStore); // TEMP - remove in prod

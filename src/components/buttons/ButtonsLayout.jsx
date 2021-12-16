@@ -32,22 +32,27 @@ const StyledButtonsLayout = styled.div`
 const ButtonsLayout = () => {
   // TODO clear all passDownIDs after passing FCC requirements
 
+  // calculator functions that are the same in reg and sci modes
+  const sciMode = useStore((state) => state.sciMode);
   const inputNumber = useStore((state) => state.inputNumber);
-  const inputPlus = useStore((state) => state.inputPlus);
-  const inputMinus = useStore((state) => state.inputMinus);
-  const inputTimes = useStore((state) => state.inputTimes);
-  const inputDivideBy = useStore((state) => state.inputDivideBy);
   const inputInverse = useStore((state) => state.inputInverse);
   const inputClear = useStore((state) => state.inputClear);
-  const inputEquals = useStore((state) => state.inputEquals);
+  const inputSqrt = useStore((state) => state.inputSqrt);
+  const inputPercent = useStore((state) => state.inputPercent);
+  const inputDecimal = useStore((state) => state.inputDecimal);
+  const inputNegative = useStore((state) => state.inputNegative);
+
+  // calculator functions that are different in reg and sci modes
+  const inputPlus = useStore((state) => sciMode ? state.sciInputPlus : state.inputPlus);
+  const inputMinus = useStore((state) => sciMode ? state.sciInputMinus : state.inputMinus);
+  const inputTimes = useStore((state) => sciMode ? state.sciInputTimes : state.inputTimes);
+  const inputDivideBy = useStore((state) => sciMode ? state.sciInputDivideBy : state.inputDivideBy);
+  const inputEquals = useStore((state) => sciMode ? state.sciInputEquals : state.inputEquals);
+
   const inputMPlus = useStore((state) => state.inputMPlus);
   const inputMMinus = useStore((state) => state.inputMMinus);
   const inputMRecall = useStore((state) => state.inputMRecall);
   const inputMClear = useStore((state) => state.inputMClear);
-  const inputDecimal = useStore((state) => state.inputDecimal);
-  const inputNegative = useStore((state) => state.inputNegative);
-  const inputSqrt = useStore((state) => state.inputSqrt);
-  const inputPercent = useStore((state) => state.inputPercent);
   
   return (
     <StyledButtonsLayout>
