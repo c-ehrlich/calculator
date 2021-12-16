@@ -60,7 +60,8 @@ export const safeEval = (inputExpression) => {
   console.log(inputExpression);
 
   try {
-  const safeInput = inputExpression.replace(/[^\d.+\-\*\/]/g, '');
+    // eslint-disable-next-line no-useless-escape
+    const safeInput = inputExpression.replace(/[^\d.+\-\*\/]/g, '');
     console.log(safeInput);
     // eslint-disable-next-line no-eval
     const safeOutput = eval(safeInput).toString();
