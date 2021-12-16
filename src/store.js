@@ -1,7 +1,7 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { safeEval } from "./utils";
+import { safeEval, toggleNegative } from "./utils";
 
 // allows us to calculate number of
 const countDecimals = (number) => {
@@ -180,23 +180,31 @@ let useStore = (set) => ({
    * In Place Calculations
    */
   inputSqrt: (state) => {
-    state.inputNum != null
+    state.inputNum !== ("" && "0")
       ? set({ inputNum: Math.sqrt(state.inputNum), lastInput: "sqrt" })
       : set({ currentCalc: Math.sqrt(state.currentCalc), lastInput: "sqrt" });
   },
   inputPercent: (state) => {
-    state.inputNum != null
+    state.inputNum !== ("" && "0")
       ? set({ inputNum: state.inputNum / 100, lastInput: "percent" })
       : set({ currentCalc: state.currentCalc / 100, lastInput: "percent" });
   },
   inputInverse: (state) => {
-    state.inputNum != null
+    state.inputNum !== ("" && "0")
       ? set({ inputNum: 1 / state.inputNum, lastInput: "inverse" })
       : set({ currentCalc: 1 / state.currentCalc, lastInput: "inverse" });
   },
-  inputNegative: (state) => {
-    set({ lastInput: "negative" });
+  inputNegative: () => {
+    // state.inputNum !== ("" && "0")
+    //   && set({ inputNum: state.inputNum, lastInput: "negative" });
+    set((state) => (
+      state.inputNum !== ("" && "0")
+        && ({
+          inputNum: toggleNegative(state.inputNum),
+        })
+    ))
   },
+  
 
   /*
    * Equals

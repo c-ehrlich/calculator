@@ -22,3 +22,16 @@ export const safeEval = (inputExpression) => {
     return "ERR";
   }
 }
+
+
+export const toggleNegative = (inputNumString) => {
+  console.log("inputNum: " + inputNumString);
+  if (isNaN(inputNumString)) {
+    console.log("error in toggleNegative - input was not a valid number");
+    console.log(inputNumString);
+    console.log(typeof inputNumString);
+    return "ERR";
+  } else {
+    return (Number(inputNumString) * -1).toString();
+  }
+}
