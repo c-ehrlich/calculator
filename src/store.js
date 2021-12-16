@@ -169,7 +169,7 @@ let useStore = (set) => ({
         state.inputNum === ("" && "0")
           ? squareRootCalculation(state.inputNum)
           : state.inputNum,
-      lastInput: "sqrt" // maybe do this only if it was successful?
+      lastInput: "sqrt", // maybe do this only if it was successful?
     }));
     // state.inputNum !== ("" && "0")
     //   ? set({ inputNum: Math.sqrt(state.inputNum), lastInput: "sqrt" })
@@ -219,9 +219,15 @@ let useStore = (set) => ({
    */
   memory: 0,
   inputMPlus: () =>
-    set((state) => ({ memory: state.memory + Number(state.inputNum), lastInput: "mplus" })),
+    set((state) => ({
+      memory: state.memory + Number(state.inputNum),
+      lastInput: "mplus",
+    })),
   inputMMinus: () =>
-    set((state) => ({ memory: state.memory - Number(state.inputNum), lastInput: "mminus" })),
+    set((state) => ({
+      memory: state.memory - Number(state.inputNum),
+      lastInput: "mminus",
+    })),
   inputMRecall: () =>
     set((state) => ({
       inputNum: state.memory,
@@ -242,27 +248,37 @@ let useStore = (set) => ({
   sciEvalString: "",
   sciInputPlus: () =>
     set((state) => ({
-      sciEvalString: (state.sciEvalString !== "0" ? state.sciEvalString : "") + state.inputNum + "+",
+      sciEvalString:
+        (state.sciEvalString !== "0" ? state.sciEvalString : "") +
+        state.inputNum +
+        "+",
       inputNum: "",
       lastInput: "plus",
+      displayLeftSide: "+",
     })),
   sciInputMinus: () =>
     set((state) => ({
       sciEvalString: state.sciEvalString + state.inputNum + "-",
       inputNum: "",
       lastInput: "minus",
+      displayLeftSide: "-",
     })),
   sciInputTimes: () =>
     set((state) => ({
       sciEvalString: state.sciEvalString + state.inputNum + "*",
       inputNum: "",
       lastInput: "times",
+      displayLeftSide: "*",
     })),
   sciInputDivideBy: () =>
     set((state) => ({
-      sciEvalString: (state.sciEvalString !== "0" ? state.sciEvalString : "") + state.inputNum + "/",
+      sciEvalString:
+        (state.sciEvalString !== "0" ? state.sciEvalString : "") +
+        state.inputNum +
+        "/",
       inputNum: "",
       lastInput: "divideby",
+      displayLeftSide: "/",
     })),
   sciInputEquals: () =>
     set((state) => ({
@@ -270,6 +286,7 @@ let useStore = (set) => ({
       sciEvalString: "0",
       inputNum: "",
       lastInput: "equals",
+      displayLeftSide: "",
     })),
 });
 
