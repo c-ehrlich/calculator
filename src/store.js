@@ -5,6 +5,7 @@ import {
   decideWhetherOrNotToAddDecimal,
   handleInputNum,
   performArithmeticOperationRegularMode,
+  performEqualsRegularMode,
   processNumberForDisplay,
   safeEval,
   squareRootCalculation,
@@ -87,8 +88,7 @@ let useStore = (set) => ({
   inputClear: () => {
     set((state) => ({
       displayLeftSide: "",
-      currentCalc:
-        state.lastInput === "clear" ? "0" : state.currentCal,
+      currentCalc: state.lastInput === "clear" ? "0" : state.currentCal,
       evalString:
         state.lastInput === ("clear" && "equals") ? "0" : state.evalString,
       inputNum: "0",
@@ -168,12 +168,16 @@ let useStore = (set) => ({
       }),
     }));
   },
-    inputEquals: () => {
-      set({
-        displayLeftSide: "",
-        lastInput: "equals",
-      });
-    },
+  inputEquals: () => {
+    set((state) => ({
+      ...performEqualsRegularMode({
+        inputNum: state.inputNum,
+        evalString: state.evalString,
+        lastInput: state.lastInput,
+      }),
+      lastInput: "equals",
+    }));
+  },
 
   /*
    *

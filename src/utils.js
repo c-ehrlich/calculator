@@ -64,6 +64,7 @@ export const performArithmeticOperationRegularMode = ({
   evalString,
   operationToPerform,
   lastInput,
+  result,
 }) => {
   // if the previous input was already an arithmetic operator, we just update the evalString
   if (["plus", "minus", "times", "divideby"].includes(lastInput)) {
@@ -82,16 +83,36 @@ export const performArithmeticOperationRegularMode = ({
   }
 
   // calculate new outputs
-  const result = processNumberForDisplay(safeEval(evalString.concat(inputNum)));
-  evalString = result.concat(getArithmeticCharFromWord(operationToPerform));
+  const newResult = processNumberForDisplay(safeEval(evalString.concat(inputNum)));
+  evalString = newResult.concat(getArithmeticCharFromWord(operationToPerform));
 
   return {
-    result: result,
+    result: newResult,
     evalString: evalString,
     inputNum: "0",
     lastInput: operationToPerform,
   };
 };
+
+// TODO write docstring
+export const performEqualsRegularMode = ({
+  inputNum,
+  evalString,
+  lastInput,
+}) => {
+  // pressing equal multiple times doesn't break the calculator
+  if (lastInput === "equals") return {};
+
+  console.log("AAA performEqualsRegularMode")
+  console.log(inputNum + ", " + evalString + ", " + lastInput);
+
+  const result = processNumberForDisplay(safeEval(evalString.concat(inputNum)));
+  return {
+    result: result,
+    inputNum: "0",
+    evalString: "",
+  }
+}
 
 /**
  * @function processNumberForDisplay
