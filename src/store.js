@@ -131,6 +131,7 @@ let useStore = (set) => ({
         evalString: state.evalString,
         operationToPerform: "plus",
         lastInput: state.lastInput,
+        result: state.result,
       }),
     }));
   },
@@ -141,6 +142,7 @@ let useStore = (set) => ({
         evalString: state.evalString,
         operationToPerform: "minus",
         lastInput: state.lastInput,
+        result: state.result,
       }),
     }));
   },
@@ -151,6 +153,7 @@ let useStore = (set) => ({
         evalString: state.evalString,
         operationToPerform: "times",
         lastInput: state.lastInput,
+        result: state.result,
       }),
     }));
   },
@@ -161,6 +164,7 @@ let useStore = (set) => ({
         evalString: state.evalString,
         operationToPerform: "divideby",
         lastInput: state.lastInput,
+        result: state.result,
       }),
     }));
   },

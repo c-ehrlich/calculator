@@ -75,6 +75,12 @@ export const performArithmeticOperationRegularMode = ({
     };
   }
 
+  if (lastInput === "equals") {
+    return {
+      evalString: result.concat(getArithmeticCharFromWord(operationToPerform)),
+    }
+  }
+
   // calculate new outputs
   const result = processNumberForDisplay(safeEval(evalString.concat(inputNum)));
   evalString = result.concat(getArithmeticCharFromWord(operationToPerform));
