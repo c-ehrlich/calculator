@@ -4,6 +4,7 @@ import { devtools } from "zustand/middleware";
 import {
   decideWhetherOrNotToAddDecimal,
   handleInputNum,
+  performArithmeticOperationRegularMode,
   processNumberForDisplay,
   safeEval,
   squareRootCalculation,
@@ -14,13 +15,11 @@ let useStore = (set) => ({
   /*
    * LOGIC
    */
-  currentCalc: 0,
   inputNum: "0",
-  currentDecimalPlaces: 0,
-  inDecimalCalculation: false,
-  calcError: false,
+  evalString: "",
+  currentCalc: "",
+  result: "0",
   lastInput: "",
-  setLastInput: (input) => set({ lastInput: input }),
 
   /*
    * POWER FUNCTIONS
@@ -42,7 +41,7 @@ let useStore = (set) => ({
     setTimeout(
       () =>
         set({
-          currentCalculation: 0,
+          currentCalc: 0,
           inputNum: 0,
           displayLeftSide: "",
         }),
@@ -69,7 +68,7 @@ let useStore = (set) => ({
       inputNum: "0",
       displayLeftSide: "",
       sciMode: true,
-      sciModeEvalString: "",
+      evalString: "",
     });
   },
   sciModeOff: () => {
@@ -78,17 +77,9 @@ let useStore = (set) => ({
       inputNum: "0",
       displayLeftSide: "",
       sciMode: false,
-      sciModeEvalString: "",
+      evalString: "",
     });
   },
-
-  sciModeEvalString: "",
-
-  /*
-   *
-   * CALCULATOR BUTTONS - REGULAR MODE
-   *
-   */
 
   /*
    * CE/C Button
@@ -96,10 +87,10 @@ let useStore = (set) => ({
   inputClear: () => {
     set((state) => ({
       displayLeftSide: "",
-      currentCalculation:
-        state.lastInput === "clear" ? "0" : state.currentCalculation,
-      sciEvalString:
-        state.lastInput === ("clear" && "equals") ? "0" : state.sciEvalString,
+      currentCalc:
+        state.lastInput === "clear" ? "0" : state.currentCal,
+      evalString:
+        state.lastInput === ("clear" && "equals") ? "0" : state.evalString,
       inputNum: "0",
       lastInput: "clear",
     }));
@@ -131,30 +122,102 @@ let useStore = (set) => ({
   },
 
   /*
-   * ARITHMETIC
+   * Plus Minus Times DivideBy Equals - Regular Mode
    */
   inputPlus: () => {
-    set({ displayLeftSide: "+", lastInput: "plus" });
+    set((state) => ({
+      ...performArithmeticOperationRegularMode({
+        inputNum: state.inputNum,
+        evalString: state.evalString,
+        operationToPerform: "plus",
+        lastInput: state.lastInput,
+      }),
+    }));
   },
   inputMinus: () => {
-    set({ displayLeftSide: "-", lastInput: "minus" });
+    set((state) => ({
+      ...performArithmeticOperationRegularMode({
+        inputNum: state.inputNum,
+        evalString: state.evalString,
+        operationToPerform: "minus",
+        lastInput: state.lastInput,
+      }),
+    }));
   },
   inputTimes: () => {
-    set({ displayLeftSide: "x", lastInput: "times" });
+    set((state) => ({
+      ...performArithmeticOperationRegularMode({
+        inputNum: state.inputNum,
+        evalString: state.evalString,
+        operationToPerform: "times",
+        lastInput: state.lastInput,
+      }),
+    }));
   },
   inputDivideBy: () => {
-    set((state) =>
-      state.sciMode
-        ? {
-            sciModeEvalString: state.sciModeEvalString + "/",
-            lastInput: "divideBy",
-          }
-        : {
-            displayLeftSide: "/",
-            lastInput: "divideBy",
-          }
-    );
+    set((state) => ({
+      ...performArithmeticOperationRegularMode({
+        inputNum: state.inputNum,
+        evalString: state.evalString,
+        operationToPerform: "divideby",
+        lastInput: state.lastInput,
+      }),
+    }));
   },
+    inputEquals: () => {
+      set({
+        displayLeftSide: "",
+        lastInput: "equals",
+      });
+    },
+
+  /*
+   *
+   * Plus Minus Times DivideBy Equals - SCIENTIFIC MODE
+   *
+   */
+  sciInputPlus: () =>
+    set((state) => ({
+      evalString:
+        (state.evalString !== "0" ? state.evalString : "") +
+        state.inputNum +
+        "+",
+      inputNum: "",
+      lastInput: "plus",
+      displayLeftSide: "+",
+    })),
+  sciInputMinus: () =>
+    set((state) => ({
+      evalString: state.evalString + state.inputNum + "-",
+      inputNum: "",
+      lastInput: "minus",
+      displayLeftSide: "-",
+    })),
+  sciInputTimes: () =>
+    set((state) => ({
+      evalString: state.evalString + state.inputNum + "*",
+      inputNum: "",
+      lastInput: "times",
+      displayLeftSide: "*",
+    })),
+  sciInputDivideBy: () =>
+    set((state) => ({
+      evalString:
+        (state.evalString !== "0" ? state.evalString : "") +
+        state.inputNum +
+        "/",
+      inputNum: "",
+      lastInput: "divideby",
+      displayLeftSide: "/",
+    })),
+  sciInputEquals: () =>
+    set((state) => ({
+      result: safeEval(state.evalString + state.inputNum),
+      evalString: "0",
+      inputNum: "",
+      lastInput: "equals",
+      displayLeftSide: "",
+    })),
 
   /*
    * In Place Calculations
@@ -171,9 +234,6 @@ let useStore = (set) => ({
           : state.inputNum,
       lastInput: "sqrt", // maybe do this only if it was successful?
     }));
-    // state.inputNum !== ("" && "0")
-    //   ? set({ inputNum: Math.sqrt(state.inputNum), lastInput: "sqrt" })
-    //   : set({ currentCalc: Math.sqrt(state.currentCalc), lastInput: "sqrt" });
   },
   // !!! this use of state is wrong
   inputPercent: (state) => {
@@ -181,7 +241,6 @@ let useStore = (set) => ({
       ? set({ inputNum: state.inputNum / 100, lastInput: "percent" })
       : set({ currentCalc: state.currentCalc / 100, lastInput: "percent" });
   },
-  // !!! this use of state is wrong
   inputInverse: () => {
     set((state) =>
       state.inputNum !== ("" && "0")
@@ -205,16 +264,6 @@ let useStore = (set) => ({
   },
 
   /*
-   * Equals
-   */
-  inputEquals: () => {
-    set({
-      displayLeftSide: "",
-      lastInput: "equals",
-    });
-  },
-
-  /*
    * Memory Functions
    */
   memory: 0,
@@ -234,60 +283,6 @@ let useStore = (set) => ({
       lastInput: "mrecall",
     })),
   inputMClear: () => set({ memory: 0, lastInput: "mclear" }),
-
-  /*
-   *
-   * CALCULATOR BUTTONS - SCIENTIFIC MODE
-   *
-   */
-
-  /*
-   * Number Input
-   */
-  sciResult: "",
-  sciEvalString: "",
-  sciInputPlus: () =>
-    set((state) => ({
-      sciEvalString:
-        (state.sciEvalString !== "0" ? state.sciEvalString : "") +
-        state.inputNum +
-        "+",
-      inputNum: "",
-      lastInput: "plus",
-      displayLeftSide: "+",
-    })),
-  sciInputMinus: () =>
-    set((state) => ({
-      sciEvalString: state.sciEvalString + state.inputNum + "-",
-      inputNum: "",
-      lastInput: "minus",
-      displayLeftSide: "-",
-    })),
-  sciInputTimes: () =>
-    set((state) => ({
-      sciEvalString: state.sciEvalString + state.inputNum + "*",
-      inputNum: "",
-      lastInput: "times",
-      displayLeftSide: "*",
-    })),
-  sciInputDivideBy: () =>
-    set((state) => ({
-      sciEvalString:
-        (state.sciEvalString !== "0" ? state.sciEvalString : "") +
-        state.inputNum +
-        "/",
-      inputNum: "",
-      lastInput: "divideby",
-      displayLeftSide: "/",
-    })),
-  sciInputEquals: () =>
-    set((state) => ({
-      sciResult: safeEval(state.sciEvalString + state.inputNum),
-      sciEvalString: "0",
-      inputNum: "",
-      lastInput: "equals",
-      displayLeftSide: "",
-    })),
 });
 
 useStore = devtools(useStore); // TEMP - remove in prod
