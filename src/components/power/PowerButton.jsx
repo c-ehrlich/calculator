@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import useStore from "../../store";
 
+import { embossedText, embossedTextSvg } from "../../styles";
+
 const PowerButtonArea = styled.div`
   display: flex;
   width: 48px;
@@ -10,6 +12,7 @@ const PowerButtonArea = styled.div`
 `;
 
 const PowerButtonBigDot = styled.div`
+  ${embossedTextSvg}
   width: 6px;
   height: 6px;
   border: 2px solid white;

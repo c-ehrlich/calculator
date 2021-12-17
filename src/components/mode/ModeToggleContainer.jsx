@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import ModeToggle from './ModeToggle';
 
+import { embossedText, embossedTextSvg } from '../../styles';
+
 const ModeToggleContainerOuter = styled.div`
   display: flex;
   gap: 6px;
@@ -23,11 +25,15 @@ const Label = styled.div`
 `;
 
 const LabelText = styled.span`
+  ${embossedText}
+  
   font-size: 12px;
   color: #DDD;
 `;
 
 const LabelDot = styled.div`
+  ${embossedTextSvg}
+  
   width: 3px;
   height: 3px;
   border-radius: 50%;

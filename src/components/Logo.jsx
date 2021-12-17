@@ -4,11 +4,15 @@ import useStore from "../store";
 import braunLogo from "../media/BraunLogo.svg";
 import reactLogo from "../media/ReactLogo.svg";
 
+import { embossedTextSvg } from "../styles";
+
 const StyledLogo = styled.div`
   margin-bottom: -8px;
 `;
 
 const LogoImage = styled.img`
+  ${embossedTextSvg}
+
   width: 48px;
   margin-left: 16px;
 `;
