@@ -14,10 +14,17 @@ import {
 
 import Button from "./Button";
 
+import plusMinusIcon from "../../media/PlusMinusIcon.svg";
+
 const StyledButtonsLayout = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
+`;
+
+const ButtonImage = styled.img`
+  width: 65%;
+  height: 65%;
 `;
 
 // TODO bring back after passing FCC requirements
@@ -43,17 +50,27 @@ const ButtonsLayout = () => {
   const inputNegative = useStore((state) => state.inputNegative);
 
   // calculator functions that are different in reg and sci modes
-  const inputPlus = useStore((state) => sciMode ? state.sciInputPlus : state.inputPlus);
-  const inputMinus = useStore((state) => sciMode ? state.sciInputMinus : state.inputMinus);
-  const inputTimes = useStore((state) => sciMode ? state.sciInputTimes : state.inputTimes);
-  const inputDivideBy = useStore((state) => sciMode ? state.sciInputDivideBy : state.inputDivideBy);
-  const inputEquals = useStore((state) => sciMode ? state.sciInputEquals : state.inputEquals);
+  const inputPlus = useStore((state) =>
+    sciMode ? state.sciInputPlus : state.inputPlus
+  );
+  const inputMinus = useStore((state) =>
+    sciMode ? state.sciInputMinus : state.inputMinus
+  );
+  const inputTimes = useStore((state) =>
+    sciMode ? state.sciInputTimes : state.inputTimes
+  );
+  const inputDivideBy = useStore((state) =>
+    sciMode ? state.sciInputDivideBy : state.inputDivideBy
+  );
+  const inputEquals = useStore((state) =>
+    sciMode ? state.sciInputEquals : state.inputEquals
+  );
 
   const inputMPlus = useStore((state) => state.inputMPlus);
   const inputMMinus = useStore((state) => state.inputMMinus);
   const inputMRecall = useStore((state) => state.inputMRecall);
   const inputMClear = useStore((state) => state.inputMClear);
-  
+
   return (
     <StyledButtonsLayout>
       <Button type="green" clickFn={inputMPlus}>
@@ -69,7 +86,7 @@ const ButtonsLayout = () => {
         MC
       </Button>
       <Button type="green" clickFn={inputNegative}>
-        +/-
+        <ButtonImage src={plusMinusIcon} alt="+/-" />
       </Button>
       <Button type="brown" clickFn={inputSqrt}>
         <FontAwesomeIcon icon={faSquareRootAlt} />
