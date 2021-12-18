@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import useStore from "../../store";
 
-import { embossedText, embossedTextSvg } from "../../styles";
+import { embossedTextSvg } from "../../styles";
 
 const PowerButtonArea = styled.div`
   display: flex;
