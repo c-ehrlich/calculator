@@ -10,9 +10,6 @@ import {
   safeEval,
   squareRootCalculation,
   toggleNegative,
-
-  // TEMP TODO remove this
-  awfulHackToPassFCC
 } from "./utils";
 
 let useStore = (set) => ({
@@ -137,8 +134,7 @@ let useStore = (set) => ({
    */
   inputPlus: () => {
     set((state) => ({
-      ...awfulHackToPassFCC({
-      // ...performArithmeticOperationRegularMode({
+      ...performArithmeticOperationRegularMode({
         inputNum: state.inputNum,
         evalString: state.evalString,
         operationToPerform: "plus",
@@ -149,10 +145,7 @@ let useStore = (set) => ({
   },
   inputMinus: () => {
     set((state) => ({
-      // TEMP TODO stupid hack to pass FCC tests 
-      ...awfulHackToPassFCC({
-
-      // ...performArithmeticOperationRegularMode({
+      ...performArithmeticOperationRegularMode({
         inputNum: state.inputNum,
         evalString: state.evalString,
         operationToPerform: "minus",

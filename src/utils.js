@@ -198,30 +198,3 @@ export const toggleNegative = (inputNumString) => {
     return (0 - Number(inputNumString)).toString();
   }
 };
-
-export const awfulHackToPassFCC = ({
-  inputNum,
-  evalString,
-  operationToPerform,
-  lastInput,
-  result,
-}) => {
-  if (lastInput === "times" && operationToPerform == "minus") {
-    return ({
-      evalString: evalString + "-",
-      lastInput: "minus",
-    })
-  } else if (evalString === "5*-") {
-    return ({ evalString: "5+"})
-  } else {
-    return ({
-      ...performArithmeticOperationRegularMode({
-        inputNum: inputNum,
-        evalString: evalString,
-        operationToPerform: operationToPerform,
-        lastInput: lastInput,
-        result: result,
-      })
-    })
-  }
-}
