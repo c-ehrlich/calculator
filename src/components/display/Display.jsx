@@ -42,6 +42,9 @@ const Display = () => {
 
   const currentCalc = useStore((state) => state.currentCalc);
   const inputNum = useStore((state) => state.inputNum);
+  const result = useStore((state) => state.result);
+
+  const lastInput = useStore((state) => state.lastInput);
   const calcError = useStore((state) => state.calcError);
 
   const displayString = useMemo(() => {
@@ -49,11 +52,16 @@ const Display = () => {
     console.log("currentCalc: " + currentCalc);
     console.log("inputNum: " + inputNum);
     console.log("calcError: " + calcError);
-    if (calcError) return "ERR"
-    if (inputNum === 0 && currentCalc === 0) return 0;
-    if (inputNum === 0) return currentCalc;
+    if (calcError) return "ERR";
+
+    if (["plus", "minus", "times", "divideby", "equals"].indexOf(lastInput) !== -1) {
+      return result;
+    }
+    return inputNum;
+    // if (inputNum === 0 && currentCalc === 0) return 0;
+    // if (inputNum === 0) return currentCalc;
     // return truncateNumberForDisplay(inputNum)
-  }, [currentCalc, inputNum, calcError]);
+  }, [currentCalc, inputNum, calcError, result, lastInput]);
 
   return (
     <DisplayBorder>
@@ -62,7 +70,7 @@ const Display = () => {
         <DisplaySmallText className={memory === 0 && "hidden"}>{memory !== 0 && "M"}</DisplaySmallText>
       </DisplayLeft>
       <DisplayMainText id="display" className={power && "power"}>
-        {inputNum}
+        {displayString}
         {/* TODO using inputNum for now for debugging, but switch back to inputString soon */}
         {/* {displayString} */}
       </DisplayMainText>
