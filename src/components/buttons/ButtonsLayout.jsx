@@ -4,7 +4,7 @@ import useStore from "../../store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDivide,
-  // faEquals, // TODO bring back after passing FCC requirements
+  faEquals,
   faMinus,
   faPercent,
   faPlus,
@@ -27,14 +27,13 @@ const ButtonImage = styled.img`
   height: 65%;
 `;
 
-// TODO bring back after passing FCC requirements
-// const WhiteDot = styled.div`
-//   width: 6px;
-//   height: 6px;
-//   border: none;
-//   background-color: white;
-//   border-radius: 50%;
-// `;
+const WhiteDot = styled.div`
+  width: 6px;
+  height: 6px;
+  border: none;
+  background-color: white;
+  border-radius: 50%;
+`;
 
 const ButtonsLayout = () => {
   // TODO clear all passDownIDs after passing FCC requirements
@@ -144,10 +143,10 @@ const ButtonsLayout = () => {
       </Button>
       {/* TODO put a circular div in here instead */}
       <Button type="brown" passDownId="decimal" clickFn={inputDecimal}>
-        .{/* <WhiteDot /> */}
+        <WhiteDot />
       </Button>
       <Button type="yellow" passDownId="equals" clickFn={() => inputEquals()}>
-        {/* <FontAwesomeIcon icon={faEquals} /> */}=
+        <FontAwesomeIcon icon={faEquals} />
       </Button>
       <Button type="brown" passDownId="add" clickFn={inputPlus}>
         <FontAwesomeIcon icon={faPlus} />
