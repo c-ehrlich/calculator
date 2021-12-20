@@ -49,7 +49,11 @@ const Display = () => {
   const displayString = useMemo(() => {
     if (calcError) return "ERR";
 
-    if (["plus", "minus", "times", "divideby", "equals"].indexOf(lastInput) !== -1) {
+    if (
+      ["plus", "minus", "times", "divideby", "equals", "percent"].indexOf(
+        lastInput
+      ) !== -1
+    ) {
       return result;
     }
     return inputNum;
@@ -61,8 +65,12 @@ const Display = () => {
   return (
     <DisplayBorder>
       <DisplayLeft>
-        <DisplaySmallText className={power && "power"}>{displayLeftSide}</DisplaySmallText>
-        <DisplaySmallText className={memory === 0 && "hidden"}>{memory !== 0 && "M"}</DisplaySmallText>
+        <DisplaySmallText className={power && "power"}>
+          {displayLeftSide}
+        </DisplaySmallText>
+        <DisplaySmallText className={memory === 0 && "hidden"}>
+          {memory !== 0 && "M"}
+        </DisplaySmallText>
       </DisplayLeft>
       <DisplayMainText id="display" className={power && "power"}>
         {displayString}

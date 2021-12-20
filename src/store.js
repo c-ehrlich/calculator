@@ -4,6 +4,7 @@ import { devtools } from "zustand/middleware";
 import {
   decideWhetherOrNotToAddDecimal,
   handleInputNum,
+  handleInputPercent,
   performArithmeticOperationRegularMode,
   performEqualsRegularMode,
   processNumberForDisplay,
@@ -110,7 +111,6 @@ let useStore = (set) => ({
    * Number Input
    */
   inputNumber: (number) => {
-    console.log("inputNumber " + number);
     set((state) => ({
       inputNum: handleInputNum({
         num: number,
@@ -254,10 +254,15 @@ let useStore = (set) => ({
     }));
   },
   // !!! this use of state is wrong
-  inputPercent: (state) => {
-    state.inputNum !== ("" && "0")
-      ? set({ inputNum: state.inputNum / 100, lastInput: "percent" })
-      : set({ currentCalc: state.currentCalc / 100, lastInput: "percent" });
+  inputPercent: () => {
+    set((state) => ({
+      ...handleInputPercent({
+        inputNum: state.inputNum,
+        evalString: state.evalString,
+        sciModeOn: state.sciModeOn,
+      }),
+      lastInput: "percent",
+    }))
   },
   inputInverse: () => {
     set((state) =>

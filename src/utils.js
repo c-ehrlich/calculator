@@ -1,8 +1,8 @@
 /**
  * @function countDecimals
  * counts how many decimal places a number has
- * 
- * @param {number} number 
+ *
+ * @param {number} number
  * @returns {number} count of decimal places (int)
  */
 export const countDecimals = (number) => {
@@ -14,12 +14,11 @@ export const countDecimals = (number) => {
  * @function decideWhetherOrNotToAddDecimal
  * Takes a string representation of a number and decides whether or not it's
  * possible to add a decimal point (by checking whether it already has one)
- * 
- * @param {string} num 
+ *
+ * @param {string} num
  * @returns {string} num - same number, either with a decimal added to the end or not
- */ 
+ */
 export const decideWhetherOrNotToAddDecimal = (num) => {
-  console.log(typeof num);
   return num.toString().includes(".") ? num : num + ".";
 };
 
@@ -27,7 +26,7 @@ export const decideWhetherOrNotToAddDecimal = (num) => {
  * @function getArithmeticCharFromWort
  * inputs a word that represents an arithmetic operation, returns that
  * character for the calculator
- * 
+ *
  * @param {*} word either 'plus', 'minus', 'times', or 'divideby'
  * @returns {string} either '+', '-', '*', or '/'
  */
@@ -50,30 +49,66 @@ export const getArithmeticCharFromWord = (word) => {
 /**
  * @function handleInputNum
  * figures out what to do when the user presses one of the number keys on the calculator
- * 
- * @param {*} param0 
- * @returns 
+ *
+ * @param {*} param0
+ * @returns
  */
 export const handleInputNum = ({ num, inputNum }) => {
-  console.log(
-    "in handleInputNum - inputNum: " +
-      inputNum +
-      typeof inputNum +
-      ", num: " +
-      num +
-      typeof num
-  );
   const inputNumNumber = Number(inputNum);
-  console.log("inputNumNumber: " + inputNumNumber);
   if (inputNum === "0") return num.toString();
   if (inputNum === "-0") return "-" + num.toString();
-  if (inputNumNumber >= 10000000 && inputNumNumber <= -10000000) return inputNum;
+  if (inputNumNumber >= 10000000 && inputNumNumber <= -10000000)
+    return inputNum;
   if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
   if (inputNum.includes(".")) {
     return countDecimals(inputNumNumber) < 4 ? inputNum + num : inputNum;
   }
 
   return inputNum + num;
+};
+
+/**
+ * @function handleInputPercent
+ * Handles the user pressing the % button
+ *
+ * EXAMPLES:
+ * 50 + 80% = 90
+ * 50 - 80% = 10
+ * 50 * 80% = 40
+ * 50 / 80% = 62.5
+ *
+ * in scientific mode, it first processes the entire remainder of the input string,
+ * and then uses the inputNum to get the %
+ *
+ * ends in a similar result as pressing = (ie inputNum and evalString are
+ * "0" and "", only result is active
+ *
+ * @param {*} param0
+ * @returns
+ */
+export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
+  if (evalString === "" || !["+", "-", "*", "/"].includes(evalString.slice(-1)))
+    return {
+      inputNum: "0",
+      evalString: "",
+      result: "0",
+    };
+
+  let evalNum = evalString.slice(0, -1);
+  if (sciModeOn) evalNum = safeEval(evalNum);
+  const evalOperator = evalString.slice(-1);
+
+  let percentNum = "";
+  if (evalOperator === "+" || evalOperator === "-") {
+    percentNum = Number(evalNum) * ((Number(inputNum) / 100));
+  } else {
+    // times or divide
+    percentNum = Number(inputNum) / 100;
+  }
+
+  const result = safeEval(evalNum + evalOperator + percentNum.toString());
+
+  return { inputNum: "0", evalString: result, result: result };
 };
 
 /**
@@ -100,14 +135,16 @@ export const performArithmeticOperationRegularMode = ({
     };
   }
 
-  if (lastInput === "equals") {
+  if (lastInput === "equals" || lastInput === "percent") {
     return {
       evalString: result.concat(getArithmeticCharFromWord(operationToPerform)),
-    }
+    };
   }
 
   // calculate new outputs
-  const newResult = processNumberForDisplay(safeEval(evalString.concat(inputNum)));
+  const newResult = processNumberForDisplay(
+    safeEval(evalString.concat(inputNum))
+  );
   evalString = newResult.concat(getArithmeticCharFromWord(operationToPerform));
 
   return {
@@ -127,16 +164,13 @@ export const performEqualsRegularMode = ({
   // pressing equal multiple times doesn't break the calculator
   if (lastInput === "equals") return {};
 
-  console.log("AAA performEqualsRegularMode")
-  console.log(inputNum + ", " + evalString + ", " + lastInput);
-
   const result = processNumberForDisplay(safeEval(evalString.concat(inputNum)));
   return {
     result: result,
     inputNum: "0",
     evalString: "",
-  }
-}
+  };
+};
 
 /**
  * @function processNumberForDisplay
@@ -171,7 +205,7 @@ export const processNumberForDisplay = (inputNumString) => {
  * @returns {string} either the result of the calculation, or "ERR"
  */
 export const safeEval = (inputExpression) => {
-  console.log(inputExpression);
+  console.log("safeEval " + inputExpression);
 
   try {
     // eslint-disable-next-line no-useless-escape
@@ -212,11 +246,7 @@ export const squareRootCalculation = (inputNumString) => {
  * @returns {string} the opposite (negative) if the input is a valid number, ERR otherwise
  */
 export const toggleNegative = (inputNumString) => {
-  console.log("inputNum: " + inputNumString);
   if (isNaN(inputNumString)) {
-    console.log("error in toggleNegative - input was not a valid number");
-    console.log(inputNumString);
-    console.log(typeof inputNumString);
     return "ERR";
   } else {
     if (inputNumString === "0") return "-0";
