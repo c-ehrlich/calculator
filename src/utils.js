@@ -7,13 +7,27 @@ export const countDecimals = (number) => {
   return Number(number.toString().split(".")[1].length);
 };
 
-// TK add comment
+/**
+ * @function decideWhetherOrNotToAddDecimal
+ * Takes a string representation of a number and decides whether or not it's
+ * possible to add a decimal point (by checking whether it already has one)
+ * 
+ * @param {string} num 
+ * @returns {string} num - same number, either with a decimal added to the end or not
+ */ 
 export const decideWhetherOrNotToAddDecimal = (num) => {
   console.log(typeof num);
   return num.toString().includes(".") ? num : num + ".";
 };
 
-// TK add comment
+/**
+ * @function getArithmeticCharFromWort
+ * inputs a word that represents an arithmetic operation, returns that
+ * character for the calculator
+ * 
+ * @param {*} word either 'plus', 'minus', 'times', or 'divideby'
+ * @returns {string} either '+', '-', '*', or '/'
+ */
 export const getArithmeticCharFromWord = (word) => {
   switch (word) {
     case "plus":
@@ -30,7 +44,13 @@ export const getArithmeticCharFromWord = (word) => {
   }
 };
 
-// handle what happens when a number is input
+/**
+ * @function handleInputNum
+ * figures out what to do when the user presses one of the number keys on the calculator
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export const handleInputNum = ({ num, inputNum, lastInput }) => {
   console.log(
     "in handleInputNum - inputNum: " +
