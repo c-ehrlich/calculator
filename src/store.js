@@ -67,6 +67,7 @@ let useStore = (set) => ({
     set({
       currentCalc: "0",
       inputNum: "0",
+      result: "0",
       displayLeftSide: "",
       sciMode: true,
       evalString: "",
@@ -76,6 +77,7 @@ let useStore = (set) => ({
     set({
       currentCalc: "0",
       inputNum: "0",
+      result: "0",
       displayLeftSide: "",
       sciMode: false,
       evalString: "",
