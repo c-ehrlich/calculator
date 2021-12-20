@@ -40,7 +40,6 @@ const Display = () => {
   const displayLeftSide = useStore((state) => state.displayLeftSide);
   const memory = useStore((state) => state.memory);
 
-  const currentCalc = useStore((state) => state.currentCalc);
   const inputNum = useStore((state) => state.inputNum);
   const result = useStore((state) => state.result);
 
@@ -48,10 +47,6 @@ const Display = () => {
   const calcError = useStore((state) => state.calcError);
 
   const displayString = useMemo(() => {
-    console.log("displayString");
-    console.log("currentCalc: " + currentCalc);
-    console.log("inputNum: " + inputNum);
-    console.log("calcError: " + calcError);
     if (calcError) return "ERR";
 
     if (["plus", "minus", "times", "divideby", "equals"].indexOf(lastInput) !== -1) {
@@ -61,7 +56,7 @@ const Display = () => {
     // if (inputNum === 0 && currentCalc === 0) return 0;
     // if (inputNum === 0) return currentCalc;
     // return truncateNumberForDisplay(inputNum)
-  }, [currentCalc, inputNum, calcError, result, lastInput]);
+  }, [inputNum, calcError, result, lastInput]);
 
   return (
     <DisplayBorder>
@@ -71,8 +66,6 @@ const Display = () => {
       </DisplayLeft>
       <DisplayMainText id="display" className={power && "power"}>
         {displayString}
-        {/* TODO using inputNum for now for debugging, but switch back to inputString soon */}
-        {/* {displayString} */}
       </DisplayMainText>
     </DisplayBorder>
   );
