@@ -1,8 +1,11 @@
-// allows us to calculate number of
+/**
+ * @function countDecimals
+ * counts how many decimal places a number has
+ * 
+ * @param {number} number 
+ * @returns {number} count of decimal places (int)
+ */
 export const countDecimals = (number) => {
-  console.log("number: ");
-  console.log(number);
-  console.log(typeof number);
   if (!number.toString().includes(".")) return 0;
   return Number(number.toString().split(".")[1].length);
 };
@@ -51,7 +54,7 @@ export const getArithmeticCharFromWord = (word) => {
  * @param {*} param0 
  * @returns 
  */
-export const handleInputNum = ({ num, inputNum, lastInput }) => {
+export const handleInputNum = ({ num, inputNum }) => {
   console.log(
     "in handleInputNum - inputNum: " +
       inputNum +
@@ -63,7 +66,8 @@ export const handleInputNum = ({ num, inputNum, lastInput }) => {
   const inputNumNumber = Number(inputNum);
   console.log("inputNumNumber: " + inputNumNumber);
   if (inputNum === "0") return num.toString();
-  if (inputNumNumber >= 10000000) return inputNum;
+  if (inputNum === "-0") return "-" + num.toString();
+  if (inputNumNumber >= 10000000 && inputNumNumber <= -10000000) return inputNum;
   if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
   if (inputNum.includes(".")) {
     return countDecimals(inputNumNumber) < 4 ? inputNum + num : inputNum;
@@ -215,6 +219,8 @@ export const toggleNegative = (inputNumString) => {
     console.log(typeof inputNumString);
     return "ERR";
   } else {
+    if (inputNumString === "0") return "-0";
+    if (inputNumString === "-0") return "0";
     return (0 - Number(inputNumString)).toString();
   }
 };
