@@ -55,9 +55,10 @@ export const getArithmeticCharFromWord = (word) => {
  */
 export const handleInputNum = ({ num, inputNum }) => {
   const inputNumNumber = Number(inputNum);
+  console.log(inputNumNumber);
   if (inputNum === "0") return num.toString();
   if (inputNum === "-0") return "-" + num.toString();
-  if (inputNumNumber >= 10000000 && inputNumNumber <= -10000000)
+  if (inputNumNumber >= 10000000 || inputNumNumber <= -10000000)
     return inputNum;
   if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
   if (inputNum.includes(".")) {
