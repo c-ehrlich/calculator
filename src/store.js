@@ -197,8 +197,8 @@ let useStore = (set) => ({
   sciInputPlus: () =>
     set((state) => ({
       evalString:
-        (state.evalString !== "0" ? state.evalString : "") +
-        state.inputNum +
+        (state.evalString !== "0" && state.evalString) +
+        (state.inputNum !== "0" && state.inputNum) +
         "+",
       inputNum: "",
       lastInput: "plus",
@@ -206,14 +206,20 @@ let useStore = (set) => ({
     })),
   sciInputMinus: () =>
     set((state) => ({
-      evalString: state.evalString + state.inputNum + "-",
+      evalString:
+        (state.evalString !== "0" && state.evalString) +
+        (state.inputNum !== "0" && state.inputNum) +
+        "-",
       inputNum: "",
       lastInput: "minus",
       displayLeftSide: "-",
     })),
   sciInputTimes: () =>
     set((state) => ({
-      evalString: state.evalString + state.inputNum + "*",
+      evalString:
+        (state.evalString !== "0" && state.evalString) +
+        (state.inputNum !== "0" && state.inputNum) +
+        "*",
       inputNum: "",
       lastInput: "times",
       displayLeftSide: "*",
@@ -221,8 +227,8 @@ let useStore = (set) => ({
   sciInputDivideBy: () =>
     set((state) => ({
       evalString:
-        (state.evalString !== "0" ? state.evalString : "") +
-        state.inputNum +
+        (state.evalString !== "0" && state.evalString) +
+        (state.inputNum !== "0" && state.inputNum) +
         "/",
       inputNum: "",
       lastInput: "divideby",
@@ -253,7 +259,6 @@ let useStore = (set) => ({
       lastInput: "sqrt", // maybe do this only if it was successful?
     }));
   },
-  // !!! this use of state is wrong
   inputPercent: () => {
     set((state) => ({
       ...handleInputPercent({

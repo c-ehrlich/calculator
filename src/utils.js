@@ -100,7 +100,7 @@ export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
 
   let percentNum = "";
   if (evalOperator === "+" || evalOperator === "-") {
-    percentNum = Number(evalNum) * ((Number(inputNum) / 100));
+    percentNum = Number(evalNum) * (Number(inputNum) / 100);
   } else {
     // times or divide
     percentNum = Number(inputNum) / 100;
@@ -115,7 +115,7 @@ export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
  * @function performArithmeticOperationRegularMode
  * performarms a mathematical function in regular mode
  *
- * @param {*} param0
+ * @param {*} param0 TODO document this
  * @returns
  */
 export const performArithmeticOperationRegularMode = ({
@@ -155,7 +155,14 @@ export const performArithmeticOperationRegularMode = ({
   };
 };
 
-// TODO write docstring
+/**
+ * @function performEqualsRegularMode
+ * process the result and other necessary values when the user
+ * presses the equals button
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export const performEqualsRegularMode = ({
   inputNum,
   evalString,
