@@ -271,17 +271,18 @@ let useStore = (set) => ({
     }))
   },
   inputInverse: () => {
-    set((state) =>
-      state.inputNum !== ("" && "0")
-        ? {
-            inputNum: processNumberForDisplay(1 / state.inputNum),
-            lastInput: "inverse",
-          }
-        : {
-            currentCalc: processNumberForDisplay(1 / state.currentCalc),
-            lastInput: "inverse",
-          }
-    );
+    set((state) => (
+      state.lastInput === "equals" ? {
+        result: processNumberForDisplay(1 / state.result),
+      } : state.inputNum !== ("" && "0") ? {
+        inputNum: processNumberForDisplay(1 / state.inputNum),
+        currentCalc: state.inputNum, // what does this do?
+        lastInput: "sqrt",
+      } : {
+        currentCalc: processNumberForDisplay(1 / state.currentCalc),
+        lastInput: "sqrt"
+      }
+    ));
   },
   inputNegative: () => {
     set(
