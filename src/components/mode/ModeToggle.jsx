@@ -2,9 +2,9 @@ import styled from "styled-components";
 import useStore from "../../store";
 
 const VerticalSwitch = styled.input`
-  ${'' /* display: none; */}
-  ${'' /* position: relative; */}
-  ${'' /* right: 20px; */}
+  ${"" /* display: none; */}
+  ${"" /* position: relative; */}
+  ${"" /* right: 20px; */}
   opacity: 50;
   width: 10;
   height: 10;
@@ -76,14 +76,22 @@ const ModeToggle = () => {
   const sciModeOn = useStore((state) => state.sciModeOn);
   const sciModeOff = useStore((state) => state.sciModeOff);
 
+  const toggleSciMode = (e) => {
+    e.preventDefault();
+    sciMode
+      ? sciModeOff()
+      : sciModeOn();
+  }
+
   return (
     <div>
       <VerticalSwitchLabel
         htmlFor="check"
         className={sciMode && "checked"}
-        onClick={sciMode ? sciModeOff : sciModeOn}
+        // onClick={sciMode ? sciModeOff : sciModeOn}
+        onClick={toggleSciMode}
       >
-        <VerticalSwitch type="checkbox" id="check" onClick={sciMode ? sciModeOff : sciModeOn} />
+        <VerticalSwitch type="checkbox" id="check" defaultChecked={sciMode} />
         <VerticalSwitchToggle className={!sciMode && "checked"}>
           <VerticalSwitchToggleHandle />
         </VerticalSwitchToggle>
