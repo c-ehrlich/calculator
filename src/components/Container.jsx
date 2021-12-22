@@ -25,7 +25,9 @@ const CalculatorOuterContainer = styled.div`
   background: rgb(246, 246, 246);
   background: linear-gradient(
     120.5deg,
-    rgba(246, 246, 246, 1) 46.5%,
+    rgba(62, 62, 62, 1) 0.5%,
+    white 1.3%,
+    white 46.5%,
     rgba(62, 62, 62, 1) 50.5%,
     rgba(11, 11, 11, 1) 54.5%
   );
