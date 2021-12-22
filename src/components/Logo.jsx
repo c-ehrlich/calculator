@@ -2,7 +2,6 @@ import styled from "styled-components";
 import useStore from "../store";
 
 import braunLogo from "../media/BraunLogo.svg";
-import reactLogo from "../media/ReactLogo.svg";
 
 import { embossedTextSvg } from "../styles";
 
@@ -22,7 +21,7 @@ const Logo = () => {
 
   return (
     <StyledLogo>
-      <LogoImage src={power ? reactLogo : braunLogo} alt="Logo" />
+      <LogoImage src={braunLogo} alt="Logo" />
     </StyledLogo>
   );
 };
