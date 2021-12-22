@@ -200,7 +200,7 @@ let useStore = (set) => ({
         (state.evalString !== "0" && state.evalString) +
         (state.inputNum !== "0" && state.inputNum) +
         "+",
-      inputNum: "",
+      inputNum: "0",
       lastInput: "plus",
       displayLeftSide: "+",
     })),
@@ -210,7 +210,7 @@ let useStore = (set) => ({
         (state.evalString !== "0" && state.evalString) +
         (state.inputNum !== "0" && state.inputNum) +
         "-",
-      inputNum: "",
+      inputNum: "0",
       lastInput: "minus",
       displayLeftSide: "-",
     })),
@@ -220,7 +220,7 @@ let useStore = (set) => ({
         (state.evalString !== "0" && state.evalString) +
         (state.inputNum !== "0" && state.inputNum) +
         "*",
-      inputNum: "",
+      inputNum: "0",
       lastInput: "times",
       displayLeftSide: "*",
     })),
@@ -230,7 +230,7 @@ let useStore = (set) => ({
         (state.evalString !== "0" && state.evalString) +
         (state.inputNum !== "0" && state.inputNum) +
         "/",
-      inputNum: "",
+      inputNum: "0",
       lastInput: "divideby",
       displayLeftSide: "/",
     })),
@@ -247,17 +247,18 @@ let useStore = (set) => ({
    * In Place Calculations
    */
   inputSqrt: () => {
-    set((state) => ({
-      inputNum:
-        state.inputNum !== ("" && "0")
-          ? squareRootCalculation(state.inputNum)
-          : state.inputNum,
-      currentCalc:
-        state.inputNum === ("" && "0")
-          ? squareRootCalculation(state.inputNum)
-          : state.inputNum,
-      lastInput: "sqrt", // maybe do this only if it was successful?
-    }));
+    set((state) => (
+      state.lastInput === "equals" ? {
+        result: squareRootCalculation(state.result),
+      } : state.inputNum !== ("" && "0") ? {
+        inputNum: squareRootCalculation(state.inputNum),
+        currentCalc: state.inputNum, // what does this do?
+        lastInput: "sqrt",
+      } : {
+        currentCalc: squareRootCalculation(state.inputNum),
+        lastInput: "sqrt"
+      }
+    ));
   },
   inputPercent: () => {
     set((state) => ({

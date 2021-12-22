@@ -240,7 +240,7 @@ export const safeEval = (inputExpression) => {
 export const squareRootCalculation = (inputNumString) => {
   const num = Number(inputNumString);
   if (num < 0) return "ERR";
-  const sqrt = Math.sqrt(num);
+  const sqrt = Math.sqrt(num).toString();
   return processNumberForDisplay(sqrt);
 };
 
