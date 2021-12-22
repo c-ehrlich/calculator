@@ -38,7 +38,7 @@ const Display = () => {
   const power = useStore((state) => state.power);
   // const display = useStore((state) => state.display); // see if we can do it without this
   const displayLeftSide = useStore((state) => state.displayLeftSide);
-  const memory = useStore((state) => state.memory);
+  const haveMemory = useStore((state) => state.haveMemory);
 
   const inputNum = useStore((state) => state.inputNum);
   const result = useStore((state) => state.result);
@@ -68,8 +68,8 @@ const Display = () => {
         <DisplaySmallText className={power && "power"}>
           {displayLeftSide}
         </DisplaySmallText>
-        <DisplaySmallText className={memory === 0 && "hidden"}>
-          {memory !== 0 && "M"}
+        <DisplaySmallText className={!haveMemory && "hidden"}>
+          {haveMemory && "M"}
         </DisplaySmallText>
       </DisplayLeft>
       <DisplayMainText id="display" className={power && "power"}>

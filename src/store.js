@@ -95,7 +95,7 @@ let useStore = (set) => ({
       result: "0",
       currentCalc: "",
       lastInput: "clear",
-    })
+    });
     // TODO recreate this to function like a "real" CE/C button
     // set((state) => ({
     //   displayLeftSide: "",
@@ -247,18 +247,22 @@ let useStore = (set) => ({
    * In Place Calculations
    */
   inputSqrt: () => {
-    set((state) => (
-      state.lastInput === "equals" ? {
-        result: squareRootCalculation(state.result),
-      } : state.inputNum !== ("" && "0") ? {
-        inputNum: squareRootCalculation(state.inputNum),
-        currentCalc: state.inputNum, // what does this do?
-        lastInput: "sqrt",
-      } : {
-        currentCalc: squareRootCalculation(state.inputNum),
-        lastInput: "sqrt"
-      }
-    ));
+    set((state) =>
+      state.lastInput === "equals"
+        ? {
+            result: squareRootCalculation(state.result),
+          }
+        : state.inputNum !== ("" && "0")
+        ? {
+            inputNum: squareRootCalculation(state.inputNum),
+            currentCalc: state.inputNum, // what does this do?
+            lastInput: "sqrt",
+          }
+        : {
+            currentCalc: squareRootCalculation(state.inputNum),
+            lastInput: "sqrt",
+          }
+    );
   },
   inputPercent: () => {
     set((state) => ({
@@ -268,21 +272,25 @@ let useStore = (set) => ({
         sciModeOn: state.sciModeOn,
       }),
       lastInput: "percent",
-    }))
+    }));
   },
   inputInverse: () => {
-    set((state) => (
-      state.lastInput === "equals" ? {
-        result: processNumberForDisplay(1 / state.result),
-      } : state.inputNum !== ("" && "0") ? {
-        inputNum: processNumberForDisplay(1 / state.inputNum),
-        currentCalc: state.inputNum, // what does this do?
-        lastInput: "sqrt",
-      } : {
-        currentCalc: processNumberForDisplay(1 / state.currentCalc),
-        lastInput: "sqrt"
-      }
-    ));
+    set((state) =>
+      state.lastInput === "equals"
+        ? {
+            result: processNumberForDisplay(1 / state.result),
+          }
+        : state.inputNum !== ("" && "0")
+        ? {
+            inputNum: processNumberForDisplay(1 / state.inputNum),
+            currentCalc: state.inputNum, // what does this do?
+            lastInput: "sqrt",
+          }
+        : {
+            currentCalc: processNumberForDisplay(1 / state.currentCalc),
+            lastInput: "sqrt",
+          }
+    );
   },
   inputNegative: () => {
     set(
@@ -296,24 +304,36 @@ let useStore = (set) => ({
   /*
    * Memory Functions
    */
-  memory: 0,
+  memory: "0",
+  haveMemory: false,
   inputMPlus: () =>
     set((state) => ({
-      memory: state.memory + Number(state.inputNum),
-      lastInput: "mplus",
+      memory: (
+        Number(state.memory) +
+        Number(state.lastInput === "equals" ? state.result : state.inputNum)
+      ).toString(),
+      haveMemory: true,
     })),
   inputMMinus: () =>
     set((state) => ({
-      memory: state.memory - Number(state.inputNum),
-      lastInput: "mminus",
+      memory: (
+        Number(state.memory) -
+        Number(state.lastInput === "equals" ? state.result : state.inputNum)
+      ).toString(),
+      haveMemory: true,
     })),
   inputMRecall: () =>
     set((state) => ({
       inputNum: state.memory,
+      haveMemory: true,
       lastInput: "mrecall",
     })),
   inputMClear: () =>
-    set({ memory: 0, lastInput: "mclear", evalString: "", result: "0" }),
+    set({
+      memory: "0",
+      haveMemory: false,
+      lastInput: "mclear",
+    }),
 });
 
 useStore = devtools(useStore); // TEMP - remove in prod
