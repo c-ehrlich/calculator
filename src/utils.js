@@ -212,15 +212,11 @@ export const processNumberForDisplay = (inputNumString) => {
  * @returns {string} either the result of the calculation, or "ERR"
  */
 export const safeEval = (inputExpression) => {
-  console.log("safeEval " + inputExpression);
-
   try {
     // eslint-disable-next-line no-useless-escape
     const safeInput = inputExpression.replace(/[^\d.+\-\*\/]/g, "");
-    console.log(safeInput);
     // eslint-disable-next-line no-eval
-    const safeOutput = eval(safeInput).toString();
-    console.log(safeOutput);
+    const safeOutput = processNumberForDisplay(eval(safeInput).toString());
     return safeOutput;
   } catch (e) {
     console.log(e);
