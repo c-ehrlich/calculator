@@ -17,8 +17,6 @@ const LogoImage = styled.img`
 `;
 
 const Logo = () => {
-  const power = useStore((state) => state.power);
-
   return (
     <StyledLogo>
       <LogoImage src={braunLogo} alt="Logo" />

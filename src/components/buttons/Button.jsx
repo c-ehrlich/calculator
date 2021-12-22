@@ -14,7 +14,9 @@ const StyledButton = styled.button`
   font-family: "AGRegular";
   white-space: nowrap;
   border-radius: 50%;
-  box-shadow: 0px 3px 8px #111, inset 0px 2px 3px #777;
+  box-shadow:
+    0px 3px 8px #111,
+    inset 0px 2px 3px #777;
   cursor: pointer;
   ${(props) => {
     switch (props.type) {

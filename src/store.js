@@ -30,10 +30,10 @@ let useStore = (set) => ({
   powerOn: () => {
     set({
       power: true,
-      display: "0",
       displayLeftSide: "",
-      currentCalc: 0,
-      inputNum: 0,
+      currentCalc: "",
+      inputNum: "0",
+      result: "0",
     });
   },
   powerOff: () => {
