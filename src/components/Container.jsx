@@ -29,7 +29,7 @@ const CalculatorOuterContainer = styled.div`
     white 1.3%,
     white 46.5%,
     rgba(62, 62, 62, 1) 50.5%,
-    rgba(11, 11, 11, 1) 54.5%
+    rgba(33, 33, 33, 1) 54.5%
   );
   padding: 4px;
   border-top-left-radius: 12px;
