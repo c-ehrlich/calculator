@@ -25,7 +25,8 @@ const StyledButton = styled.button`
   &:hover {
     box-shadow: inset 17px 24px 40px -30px rgba(255, 255, 255, 0.4),
       inset 6px 9px 5px -10px rgba(255, 255, 255, 0.3),
-      0 0 15px -4px rgba(255, 255, 255, 0.7);
+      4px 7px 7px rgba(0, 0, 0, 0.3), 1.5px 3px 7px rgba(0, 0, 0, 0.6),
+      0 0 15px -1px rgba(255, 255, 255, 0.7);
   }
 
   &.black {
@@ -76,10 +77,10 @@ const StyledButton = styled.button`
       4px 7px 7px rgba(0, 0, 0, 0.2), 1.5px 3px 7px rgba(0, 0, 0, 0.5);
 
     &:hover {
-      box-shadow: 0 0 15px -4px rgba(255, 255, 255, 0.7),
+      box-shadow: 4px 7px 7px rgba(0, 0, 0, 0.2),
+        1.5px 3px 7px rgba(0, 0, 0, 0.5), 0 0 15px 0px rgba(255, 255, 255, 0.7),
         inset 17px 24px 40px -30px rgba(255, 255, 255, 0.9),
         inset 6px 9px 5px -10px rgba(255, 255, 255, 0.5);
-        
     }
 
     &:active {
