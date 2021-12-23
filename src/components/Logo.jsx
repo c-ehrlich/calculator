@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import useStore from "../store";
 
 import braunLogo from "../media/BraunLogo.svg";
 
