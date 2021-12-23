@@ -88,7 +88,7 @@ export const handleInputNum = ({ num, inputNum }) => {
     return inputNum;
   if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
   if (inputNum.includes(".")) {
-    return countDecimals(inputNumNumber) < 4 ? inputNum + num : inputNum;
+    return inputNum.length < 11 ? inputNum + num : inputNum;
   }
 
   return inputNum + num;
@@ -214,9 +214,9 @@ export const performEqualsRegularMode = ({
  * @function processNumberForDisplay
  * takes a string that represents and integer or decimal number, and processes it
  * for display on the calculator screen. this means reducing it to a maximum of
- * 8 digits, not including the decimal point. numbers larger than 99,999,999 return
+ * 10 digits, not including the decimal point. numbers larger than 99,999,999 return
  * an error, others have their decimal precision reduced if necessary to fit within
- * the 8 characters.
+ * the 10 characters.
  *
  * @param {*} inputNumString
  * @returns
