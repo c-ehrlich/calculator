@@ -26,18 +26,30 @@ const StyledButton = styled.button`
     background-color: black;
     color: white;
     font-size: 24px;
+
+    &:hover {
+      background-color: rgb(38, 38, 38);
+    }
   }
 
   &.brown {
     background-color: rgb(54, 20, 2);
     color: white;
     font-size: 17px;
+
+    &:hover {
+      background-color: rgb(103, 39, 4);
+    }
   }
 
   &.green {
     background-color: rgb(0, 46, 19);
     color: white;
     font-size: 20px;
+    
+    &:hover {
+      background-color: rgb(0, 97, 40);
+    }
   }
 
   &.yellow {
@@ -49,6 +61,10 @@ const StyledButton = styled.button`
       inset 6px 9px 5px -10px rgba(255, 255, 255, 0.5),
       4px 7px 7px rgba(0, 0, 0, 0.2),
       1.5px 3px 7px rgba(0, 0, 0, 0.5);
+    
+    &:hover {
+      background-color: rgb(255, 184, 41);
+    }
   }
 `;
 
