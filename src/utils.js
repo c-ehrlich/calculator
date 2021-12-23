@@ -23,7 +23,7 @@ export const decideWhetherOrNotToAddDecimal = (num) => {
 };
 
 /**
- * @function getArithmeticCharFromWort
+ * @function getArithmeticCharFromWord
  * inputs a word that represents an arithmetic operation, returns that
  * character for the calculator
  *
@@ -42,6 +42,30 @@ export const getArithmeticCharFromWord = (word) => {
       return "/";
     default:
       console.log("error in getArithmeticCharFromWord. input: " + word);
+      return "ERR";
+  }
+};
+
+/**
+ * @function getArithmeticDisplayCharFromWord
+ * inputs a word that represents an arithmetic operation, returns the
+ * relevant character for the left side of the display
+ *
+ * @param {*} word either 'plus', 'minus', 'times', or 'divideby'
+ * @returns {string} either '+', '-', 'x', or '/'
+ */
+ export const getArithmeticDisplayCharFromWord = (word) => {
+  switch (word) {
+    case "plus":
+      return "+";
+    case "minus":
+      return "-";
+    case "times":
+      return "x";
+    case "divideby":
+      return "/";
+    default:
+      console.log("error in getArithmeticDisplayCharFromWord. input: " + word);
       return "ERR";
   }
 };
@@ -126,19 +150,21 @@ export const performArithmeticOperationRegularMode = ({
   lastInput,
   result,
 }) => {
+  const operator = getArithmeticCharFromWord(operationToPerform);
+  const displayOperator = getArithmeticDisplayCharFromWord(operationToPerform);
   // if the previous input was already an arithmetic operator, we just update the evalString
   if (["plus", "minus", "times", "divideby"].includes(lastInput)) {
     return {
       evalString: evalString
         .slice(0, -1)
-        .concat(getArithmeticCharFromWord(operationToPerform)),
+        .concat(operator),
       lastInput: operationToPerform,
     };
   }
 
   if (lastInput === "equals" || lastInput === "percent") {
     return {
-      evalString: result.concat(getArithmeticCharFromWord(operationToPerform)),
+      evalString: result.concat(operator),
     };
   }
 
@@ -146,13 +172,14 @@ export const performArithmeticOperationRegularMode = ({
   const newResult = processNumberForDisplay(
     safeEval(evalString.concat(inputNum))
   );
-  evalString = newResult.concat(getArithmeticCharFromWord(operationToPerform));
+  evalString = newResult.concat(operator);
 
   return {
     result: newResult,
     evalString: evalString,
     inputNum: "0",
     lastInput: operationToPerform,
+    displayLeftSide: displayOperator,
   };
 };
 
@@ -177,6 +204,7 @@ export const performEqualsRegularMode = ({
     result: result,
     inputNum: "0",
     evalString: "",
+    displayLeftSide: "",
   };
 };
 
