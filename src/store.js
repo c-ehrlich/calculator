@@ -46,6 +46,8 @@ let useStore = (set) => ({
           currentCalc: 0,
           inputNum: 0,
           displayLeftSide: "",
+          memory: "0",
+          haveMemory: false,
         }),
       200
     );
@@ -308,24 +310,23 @@ let useStore = (set) => ({
   haveMemory: false,
   inputMPlus: () =>
     set((state) => ({
-      memory: (
+      memory: processNumberForDisplay((
         Number(state.memory) +
         Number(state.lastInput === "equals" ? state.result : state.inputNum)
-      ).toString(),
+      ).toString()),
       haveMemory: true,
     })),
   inputMMinus: () =>
     set((state) => ({
-      memory: (
+      memory: processNumberForDisplay((
         Number(state.memory) -
         Number(state.lastInput === "equals" ? state.result : state.inputNum)
-      ).toString(),
+      ).toString()),
       haveMemory: true,
     })),
   inputMRecall: () =>
     set((state) => ({
       inputNum: state.memory,
-      haveMemory: true,
       lastInput: "mrecall",
     })),
   inputMClear: () =>
