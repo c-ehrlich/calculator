@@ -58,7 +58,7 @@ export const handleInputNum = ({ num, inputNum }) => {
   console.log(inputNumNumber);
   if (inputNum === "0") return num.toString();
   if (inputNum === "-0") return "-" + num.toString();
-  if (inputNumNumber >= 10000000 || inputNumNumber <= -10000000)
+  if (inputNumNumber >= 1000000000 || inputNumNumber <= -1000000000)
     return inputNum;
   if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
   if (inputNum.includes(".")) {
@@ -195,10 +195,10 @@ export const processNumberForDisplay = (inputNumString) => {
   let num = inputNumString.toString().split(".")[0];
   const negativeModifier = num < 0 ? -1 : 0;
   let decimal = inputNumString.toString().split(".")[1] || "";
-  if (num.length + negativeModifier > 8) return "ERR";
+  if (num.length + negativeModifier > 10) return "ERR";
   if (decimal === "") return num;
   decimal = decimal
-    .slice(0, 9 - (num.length + negativeModifier))
+    .slice(0, 11 - (num.length + negativeModifier))
     .replace(/0+$/g, "");
   return num + "." + decimal;
 };
