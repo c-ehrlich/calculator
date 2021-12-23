@@ -17,7 +17,10 @@ const PowerButtonBigDot = styled.div`
   height: 6px;
   border: 2px solid white;
   border-radius: 50%;
-  background-color: ${(props) => (props.onoff ? "white" : "transparent")};
+
+  &.on {
+    background-color: white;
+  }
 `;
 
 const StyledPowerButton = styled.button`
@@ -26,10 +29,36 @@ const StyledPowerButton = styled.button`
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  background-color: ${(props) => (props.onoff ? "rgb(0, 100, 0)" : "rgb(220, 0, 0)")};
   box-shadow: inset 14px 23px 12px -24px rgba(255, 255, 255, 0.8),
-    1.5px 3px 7px 2px black,
-    0 0 10px -2px rgba(0, 0, 0, 0.3);
+    1.5px 3px 7px 2px black, 0 0 10px -2px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    box-shadow: inset 14px 23px 12px -24px rgba(255, 255, 255, 0.8),
+      1.5px 3px 7px 2px black, 0 0 10px -2px rgba(0, 0, 0, 0.3),
+      0 0 15px 0px rgba(255, 255, 255, 0.7);
+  }
+
+  &.on {
+    background-color: rgb(0, 100, 0);
+
+    &:active {
+      border: 0.5px solid black;
+      box-shadow: 1.5px 3px 7px 2px black, 0 0 10px -2px rgba(0, 0, 0, 0.3),
+        0 0 15px 0px rgba(255, 255, 255, 0.7), inset 3px 3px 10px rgba(0, 46, 0, 0.9),
+        inset -3px -3px 10px rgba(110, 186, 110, 0.9);
+    }
+  }
+
+  &.off {
+    background-color: rgb(220, 0, 0);
+
+    &:active {
+      border: 0.5px solid black;
+      box-shadow: 1.5px 3px 7px 2px black, 0 0 10px -2px rgba(0, 0, 0, 0.3),
+        0 0 15px 0px rgba(255, 255, 255, 0.7), inset 3px 3px 10px rgba(56, 0, 0, 0.9),
+        inset -3px -3px 10px rgba(255, 148, 148, 0.9);
+    }
+  }
 `;
 
 const PowerButton = ({ onoff }) => {
@@ -38,8 +67,11 @@ const PowerButton = ({ onoff }) => {
 
   return (
     <PowerButtonArea>
-      <StyledPowerButton onClick={onoff ? powerOn : powerOff} onoff={onoff} />
-      <PowerButtonBigDot onoff={onoff} />
+      <StyledPowerButton
+        onClick={onoff ? powerOn : powerOff}
+        className={onoff ? "on" : "off"}
+      />
+      <PowerButtonBigDot className={onoff ? "on" : "off"} />
     </PowerButtonArea>
   );
 };
