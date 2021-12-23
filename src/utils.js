@@ -19,7 +19,9 @@ export const countDecimals = (number) => {
  * @returns {string} num - same number, either with a decimal added to the end or not
  */
 export const decideWhetherOrNotToAddDecimal = (num) => {
-  return num.toString().includes(".") ? num : num + ".";
+  if (num.length >= 10) return num;
+  if (num.includes(".")) return num;
+  return num + ".";
 };
 
 /**
