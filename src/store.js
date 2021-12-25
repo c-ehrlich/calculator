@@ -14,6 +14,13 @@ import {
 } from "./utils";
 
 let useStore = (set) => ({
+  /**
+   * UI
+   */
+  modalOpen: false,
+  openModal: () => set({ modalOpen: true }),
+  closeModal: () => set({ modalOpen: false }),
+
   /*
    * LOGIC
    */
