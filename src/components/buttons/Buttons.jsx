@@ -91,11 +91,11 @@ const Buttons = () => {
           inputDivideBy();
           break;
         case "=":
-        case "Enter":
+        case "enter":
           inputEquals();
           break;
         case "c":
-        case "Backspace":
+        case "backspace":
           inputClear();
           break;
         case "s":
