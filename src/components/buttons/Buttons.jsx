@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import useStore from "../../store";
 
@@ -16,7 +17,7 @@ import Button from "./Button";
 
 import plusMinusIcon from "../../media/PlusMinusIcon.svg";
 
-const StyledButtonsLayout = styled.div`
+const StyledButtons = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
@@ -35,7 +36,7 @@ const WhiteDot = styled.div`
   border-radius: 50%;
 `;
 
-const ButtonsLayout = () => {
+const Buttons = () => {
   // calculator functions that are the same in reg and sci modes
   const sciMode = useStore((state) => state.sciMode);
   const inputNumber = useStore((state) => state.inputNumber);
@@ -68,8 +69,75 @@ const ButtonsLayout = () => {
   const inputMRecall = useStore((state) => state.inputMRecall);
   const inputMClear = useStore((state) => state.inputMClear);
 
+  const handleKeyDown = (e) => {
+    console.log(e);
+    if (e.key.match(/\d/)) {
+      inputNumber(e.key);
+    } else {
+      switch (e.key.toLowerCase()) {
+        case ".":
+          inputDecimal();
+          break;
+        case "+":
+          inputPlus();
+          break;
+        case "-":
+          inputMinus();
+          break;
+        case "*":
+          inputTimes();
+          break;
+        case "/":
+          inputDivideBy();
+          break;
+        case "=":
+        case "Enter":
+          inputEquals();
+          break;
+        case "c":
+        case "Backspace":
+          inputClear();
+          break;
+        case "s":
+          inputSqrt();
+          break;
+        case "p":
+        case "%":
+          inputPercent();
+          break;
+        case "i":
+          inputInverse();
+          break;
+        case "n":
+          inputNegative();
+          break;
+        case "q":
+          inputMPlus();
+          break;
+        case "w":
+          inputMMinus();
+          break;
+        case "e":
+          inputMRecall();
+          break;
+        case "r":
+          inputMClear();
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
   return (
-    <StyledButtonsLayout>
+    <StyledButtons>
       <Button type="green" clickFn={inputMPlus}>
         <span>M +</span>
       </Button>
@@ -149,8 +217,8 @@ const ButtonsLayout = () => {
       <Button type="brown" clickFn={inputPlus}>
         <FontAwesomeIcon icon={faPlus} />
       </Button>
-    </StyledButtonsLayout>
+    </StyledButtons>
   );
 };
 
-export default ButtonsLayout;
+export default Buttons;

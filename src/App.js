@@ -2,7 +2,7 @@ import "./App.css";
 import styled from "styled-components";
 import GlobalFonts from "./media/fonts";
 
-import ButtonsLayout from "./components/buttons/ButtonsLayout";
+import Buttons from "./components/buttons/Buttons";
 import Container from "./components/Container";
 import Display from "./components/display/Display";
 import Logo from "./components/Logo";
@@ -25,7 +25,7 @@ function App() {
           <Power />
           <ModeToggleContainer />
         </SettingsRow>
-        <ButtonsLayout />
+        <Buttons />
       </Container>
     </StyledApp>
   );
