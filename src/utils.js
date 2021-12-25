@@ -56,7 +56,7 @@ export const getArithmeticCharFromWord = (word) => {
  * @param {*} word either 'plus', 'minus', 'times', or 'divideby'
  * @returns {string} either '+', '-', 'x', or '/'
  */
- export const getArithmeticDisplayCharFromWord = (word) => {
+export const getArithmeticDisplayCharFromWord = (word) => {
   switch (word) {
     case "plus":
       return "+";
@@ -135,7 +135,12 @@ export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
 
   const result = safeEval(evalNum + evalOperator + percentNum.toString());
 
-  return { inputNum: "0", evalString: result, result: result };
+  return {
+    inputNum: "0",
+    evalString: result,
+    result: result,
+    displayLeftSide: "",
+  };
 };
 
 /**
@@ -157,9 +162,7 @@ export const performArithmeticOperationRegularMode = ({
   // if the previous input was already an arithmetic operator, we just update the evalString
   if (["plus", "minus", "times", "divideby"].includes(lastInput)) {
     return {
-      evalString: evalString
-        .slice(0, -1)
-        .concat(operator),
+      evalString: evalString.slice(0, -1).concat(operator),
       lastInput: operationToPerform,
     };
   }
@@ -189,9 +192,9 @@ export const performArithmeticOperationRegularMode = ({
  * @function performEqualsRegularMode
  * process the result and other necessary values when the user
  * presses the equals button
- * 
- * @param {*} param0 
- * @returns 
+ *
+ * @param {*} param0
+ * @returns
  */
 export const performEqualsRegularMode = ({
   inputNum,
