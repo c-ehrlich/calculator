@@ -36,8 +36,6 @@ const WhiteDot = styled.div`
 `;
 
 const ButtonsLayout = () => {
-  // TODO clear all passDownIDs after passing FCC requirements
-
   // calculator functions that are the same in reg and sci modes
   const sciMode = useStore((state) => state.sciMode);
   const inputNumber = useStore((state) => state.inputNumber);
@@ -90,65 +88,65 @@ const ButtonsLayout = () => {
       <Button type="brown" clickFn={inputSqrt}>
         <FontAwesomeIcon icon={faSquareRootAlt} />
       </Button>
-      <Button type="black" passDownId="seven" clickFn={() => inputNumber(7)}>
+      <Button type="black" clickFn={() => inputNumber(7)}>
         7
       </Button>
-      <Button type="black" passDownId="eight" clickFn={() => inputNumber(8)}>
+      <Button type="black" clickFn={() => inputNumber(8)}>
         8
       </Button>
-      <Button type="black" passDownId="nine" clickFn={() => inputNumber(9)}>
+      <Button type="black" clickFn={() => inputNumber(9)}>
         9
       </Button>
-      <Button type="brown" passDownId="divide" clickFn={inputDivideBy}>
+      <Button type="brown" clickFn={inputDivideBy}>
         <FontAwesomeIcon icon={faDivide} />
       </Button>
-      <Button type="brown" passDownId="percent" clickFn={inputPercent}>
+      <Button type="brown" clickFn={inputPercent}>
         <FontAwesomeIcon icon={faPercent} />
       </Button>
-      <Button type="black" passDownId="four" clickFn={() => inputNumber(4)}>
+      <Button type="black" clickFn={() => inputNumber(4)}>
         4
       </Button>
-      <Button type="black" passDownId="five" clickFn={() => inputNumber(5)}>
+      <Button type="black" clickFn={() => inputNumber(5)}>
         5
       </Button>
-      <Button type="black" passDownId="six" clickFn={() => inputNumber(6)}>
+      <Button type="black" clickFn={() => inputNumber(6)}>
         6
       </Button>
-      <Button type="brown" passDownId="multiply" clickFn={inputTimes}>
+      <Button type="brown" clickFn={inputTimes}>
         <FontAwesomeIcon icon={faTimes} />
       </Button>
-      <Button type="brown" passDownId="inverse" clickFn={inputInverse}>
+      <Button type="brown" clickFn={inputInverse}>
         <span>
           X<sup>-1</sup>
         </span>
       </Button>
-      <Button type="black" passDownId="one" clickFn={() => inputNumber(1)}>
+      <Button type="black" clickFn={() => inputNumber(1)}>
         1
       </Button>
-      <Button type="black" passDownId="two" clickFn={() => inputNumber(2)}>
+      <Button type="black" clickFn={() => inputNumber(2)}>
         2
       </Button>
-      <Button type="black" passDownId="three" clickFn={() => inputNumber(3)}>
+      <Button type="black" clickFn={() => inputNumber(3)}>
         3
       </Button>
-      <Button type="brown" passDownId="subtract" clickFn={inputMinus}>
+      <Button type="brown" clickFn={inputMinus}>
         <FontAwesomeIcon icon={faMinus} />
       </Button>
-      <Button type="brown" passDownId="clear" clickFn={inputClear}>
+      <Button type="brown" clickFn={inputClear}>
         <span>CE</span>
         <span>C</span>
       </Button>
-      <Button type="black" passDownId="zero" clickFn={() => inputNumber(0)}>
+      <Button type="black" clickFn={() => inputNumber(0)}>
         0
       </Button>
       {/* TODO put a circular div in here instead */}
-      <Button type="brown" passDownId="decimal" clickFn={inputDecimal}>
+      <Button type="brown" clickFn={inputDecimal}>
         <WhiteDot />
       </Button>
-      <Button type="yellow" passDownId="equals" clickFn={() => inputEquals()}>
+      <Button type="yellow" clickFn={() => inputEquals()}>
         <FontAwesomeIcon icon={faEquals} />
       </Button>
-      <Button type="brown" passDownId="add" clickFn={inputPlus}>
+      <Button type="brown" clickFn={inputPlus}>
         <FontAwesomeIcon icon={faPlus} />
       </Button>
     </StyledButtonsLayout>
