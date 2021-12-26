@@ -36,7 +36,6 @@ const DisplayLeft = styled.div`
 
 const Display = () => {
   const power = useStore((state) => state.power);
-  // const display = useStore((state) => state.display); // see if we can do it without this
   const displayLeftSide = useStore((state) => state.displayLeftSide);
   const haveMemory = useStore((state) => state.haveMemory);
 

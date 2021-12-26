@@ -19,6 +19,8 @@ const StyledApp = styled.div`
 `;
 
 function App() {
+  const display = useStore((state) => state.display); // TEMP REMOVE
+
   const modalOpen = useStore((state) => state.modalOpen);
   const openModal = useStore((state) => state.openModal);
   const closeModal = useStore((state) => state.closeModal);
@@ -32,8 +34,10 @@ function App() {
         </FullScreenModal>
       )}
       {!modalOpen && <ModalButton openModal={openModal} />}
+      
       <Container>
         <Logo />
+        <div>{display}</div>
         <Display />
         <SettingsRow>
           <Power />

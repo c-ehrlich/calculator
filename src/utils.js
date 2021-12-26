@@ -81,17 +81,35 @@ export const getArithmeticDisplayCharFromWord = (word) => {
  */
 export const handleInputNum = ({ num, inputNum }) => {
   const inputNumNumber = Number(inputNum);
-  console.log(inputNumNumber);
-  if (inputNum === "0") return num.toString();
-  if (inputNum === "-0") return "-" + num.toString();
-  if (inputNumNumber >= 1000000000 || inputNumNumber <= -1000000000)
-    return inputNum;
-  if (inputNum[inputNum.length - 1] === ".") return inputNum + num;
-  if (inputNum.includes(".")) {
-    return inputNum.length < 11 ? inputNum + num : inputNum;
+  let returnValue = "";
+
+  switch (true) {
+    case inputNum === "0":
+      returnValue = num.toString();
+      break;
+    case inputNum === "-0":
+      returnValue = "-" + num.toString();
+      break;
+    case inputNumNumber >= 1000000000 || inputNumNumber <= -1000000000:
+      returnValue = inputNum;
+      break;
+    case inputNum[inputNum.length - 1] === ".":
+      returnValue = inputNum + num;
+      break;
+    case inputNum.includes("."):
+      returnValue = inputNum.length < 11 ? inputNum + num : inputNum;
+      break;
+    default:
+      returnValue = inputNum + num;
   }
 
-  return inputNum + num;
+  console.log(returnValue);
+
+  return {
+    inputNum: returnValue,
+    display: returnValue,
+    lastInput: "num",
+  }
 };
 
 /**

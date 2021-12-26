@@ -21,6 +21,8 @@ let useStore = (set) => ({
   openModal: () => set({ modalOpen: true }),
   closeModal: () => set({ modalOpen: false }),
 
+  display: "0",
+
   /*
    * LOGIC
    */
@@ -121,12 +123,10 @@ let useStore = (set) => ({
    */
   inputNumber: (number) => {
     set((state) => ({
-      inputNum: handleInputNum({
+      ...handleInputNum({
         num: number,
         inputNum: state.inputNum,
-        lastInput: state.lastInput,
       }),
-      lastInput: "num",
     }));
   },
 
@@ -317,18 +317,22 @@ let useStore = (set) => ({
   haveMemory: false,
   inputMPlus: () =>
     set((state) => ({
-      memory: processNumberForDisplay((
-        Number(state.memory) +
-        Number(state.lastInput === "equals" ? state.result : state.inputNum)
-      ).toString()),
+      memory: processNumberForDisplay(
+        (
+          Number(state.memory) +
+          Number(state.lastInput === "equals" ? state.result : state.inputNum)
+        ).toString()
+      ),
       haveMemory: true,
     })),
   inputMMinus: () =>
     set((state) => ({
-      memory: processNumberForDisplay((
-        Number(state.memory) -
-        Number(state.lastInput === "equals" ? state.result : state.inputNum)
-      ).toString()),
+      memory: processNumberForDisplay(
+        (
+          Number(state.memory) -
+          Number(state.lastInput === "equals" ? state.result : state.inputNum)
+        ).toString()
+      ),
       haveMemory: true,
     })),
   inputMRecall: () =>
