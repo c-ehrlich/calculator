@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 const ModalHeader = styled.h1`
   font-family: "AGExtended";
+  margin-top: 8px;
+  margin-bottom: 16px;
   ${'' /* font-family: "AGRegular"; */}
 `;
 

@@ -9,12 +9,12 @@ const StyledModalButton = styled.button`
   right: 16px;
   width: 32px;
   height: 32px;
-  font-family: "AGRegular";
   font-size: 16px;
   border-radius: 50%;
-  font-family: 'Orbitron', monospace;
+  font-family: 'Cutive', monospace;
   font-weight: 800;
   cursor: pointer;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.4);
 
   &:hover {
     background-color: rgba(255, 255, 255, 1);
