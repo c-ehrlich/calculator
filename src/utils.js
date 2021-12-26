@@ -59,6 +59,30 @@ export const getArithmeticDisplayCharFromWord = (word) => {
 };
 
 /**
+ * @function handleInputClear
+ * handles the clear button
+ */
+export const handleInputClear = ({ lastInput }) => {
+  if (lastInput !== "clear") {
+    return {
+      inputNum: "0",
+      display: "0",
+      lastInput: "clear",
+    };
+  } else {
+    return {
+      inputNum: "0",
+      display: "0",
+      lastInput: "clear",
+      result: "0",
+      displayLeftSide: "",
+      currentCalc: "",
+      evalString: "",
+    };
+  }
+};
+
+/**
  * @function handleInputDecimal
  * Takes a string representation of a number and decides whether or not it's
  * possible to add a decimal point (by checking whether it already has one)
@@ -83,47 +107,35 @@ export const handleInputDecimal = (num) => {
  * @function handleInputMMinus
  * attempts to subtrate the current input from memory
  */
-export const handleInputMMinus = ({
-  inputNum,
-  lastInput,
-  memory,
-  result,
-}) => {
+export const handleInputMMinus = ({ inputNum, lastInput, memory, result }) => {
   const returnValue = processNumberForDisplay(
     (
-      Number(memory) -
-      Number(lastInput === "equals" ? result : inputNum)
+      Number(memory) - Number(lastInput === "equals" ? result : inputNum)
     ).toString()
-  )
+  );
   return {
     haveMemory: true,
     memory: returnValue,
     display: returnValue,
-  }
-}
+  };
+};
 
 /**
  * @function handleInputMPlus
  * attempts to add the current input to the memory
  */
-export const handleInputMPlus = ({
-  inputNum,
-  lastInput,
-  memory,
-  result,
-}) => {
+export const handleInputMPlus = ({ inputNum, lastInput, memory, result }) => {
   const returnValue = processNumberForDisplay(
     (
-      Number(memory) +
-      Number(lastInput === "equals" ? result : inputNum)
+      Number(memory) + Number(lastInput === "equals" ? result : inputNum)
     ).toString()
-  )
+  );
   return {
     haveMemory: true,
     memory: returnValue,
     display: returnValue,
-  }
-}
+  };
+};
 
 /**
  * @function handleInputInverse
@@ -141,7 +153,7 @@ export const handleInputInverse = ({
     return {
       display: returnValue,
       result: returnValue,
-    }
+    };
   }
 
   if (inputNum !== "" && inputNum !== "0") {
@@ -151,16 +163,16 @@ export const handleInputInverse = ({
       inputNum: returnValue,
       currentCalc: inputNum, // what does this do?
       lastInput: "sqrt",
-    }
+    };
   } else {
     const returnValue = processNumberForDisplay(1 / currentCalc);
     return {
       currentCalc: returnValue,
       display: returnValue,
       lastInput: "sqrt",
-    }
+    };
   }
-}
+};
 
 /**
  * @function handleInputNum
@@ -257,11 +269,7 @@ export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
  * @function handleInputSqrt
  * handles Square Root input
  */
- export const handleInputSqrt = ({
-  inputNum,
-  lastInput,
-  result,
-}) => {
+export const handleInputSqrt = ({ inputNum, lastInput, result }) => {
   if (lastInput === "equals") {
     const returnValue = squareRootCalculationMath(result);
     return {
@@ -283,10 +291,10 @@ export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
     return {
       currentCalc: returnValue,
       display: returnValue,
-      lastInput: "squareRoot", 
-    }
+      lastInput: "squareRoot",
+    };
   }
-}
+};
 
 /**
  * @function performArithmeticOperationRegularMode
@@ -416,7 +424,7 @@ export const safeEval = (inputExpression) => {
  * @param {string} inputNumString
  * @returns {string}
  */
- export const squareRootCalculationMath = (inputNumString) => {
+export const squareRootCalculationMath = (inputNumString) => {
   const num = Number(inputNumString);
   if (num < 0) return "ERR";
   const sqrt = Math.sqrt(num).toString();

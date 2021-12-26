@@ -2,6 +2,7 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 
 import {
+  handleInputClear,
   handleInputDecimal,
   handleInputInverse,
   handleInputMMinus,
@@ -102,22 +103,11 @@ let useStore = (set) => ({
    * CE/C Button
    */
   inputClear: () => {
-    set({
-      inputNum: "0",
-      evalString: "",
-      result: "0",
-      currentCalc: "",
-      lastInput: "clear",
-    });
-    // TODO recreate this to function like a "real" CE/C button
-    // set((state) => ({
-    //   displayLeftSide: "",
-    //   currentCalc: state.lastInput === "clear" ? "0" : state.currentCal,
-    //   evalString:
-    //     state.lastInput === ("clear" && "equals") ? "0" : state.evalString,
-    //   inputNum: "0",
-    //   lastInput: "clear",
-    // }));
+    set((state) =>({
+      ...handleInputClear({
+        lastInput: state.lastInput,
+      }),
+    }));
   },
 
   /*
