@@ -2,7 +2,7 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 
 import {
-  decideWhetherOrNotToAddDecimal,
+  handleInputDecimal,
   handleInputNum,
   handleInputPercent,
   performArithmeticOperationRegularMode,
@@ -135,8 +135,7 @@ let useStore = (set) => ({
    */
   inputDecimal: () => {
     set((state) => ({
-      inputNum: decideWhetherOrNotToAddDecimal(state.inputNum),
-      lastInput: "decimal",
+      ...handleInputDecimal(state.inputNum),
     }));
   },
 

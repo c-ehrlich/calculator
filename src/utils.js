@@ -11,20 +11,6 @@ export const countDecimals = (number) => {
 };
 
 /**
- * @function decideWhetherOrNotToAddDecimal
- * Takes a string representation of a number and decides whether or not it's
- * possible to add a decimal point (by checking whether it already has one)
- *
- * @param {string} num
- * @returns {string} num - same number, either with a decimal added to the end or not
- */
-export const decideWhetherOrNotToAddDecimal = (num) => {
-  if (num.length >= 10) return num;
-  if (num.includes(".")) return num;
-  return num + ".";
-};
-
-/**
  * @function getArithmeticCharFromWord
  * inputs a word that represents an arithmetic operation, returns that
  * character for the calculator
@@ -73,6 +59,27 @@ export const getArithmeticDisplayCharFromWord = (word) => {
 };
 
 /**
+ * @function handleInputDecimal
+ * Takes a string representation of a number and decides whether or not it's
+ * possible to add a decimal point (by checking whether it already has one)
+ *
+ * @param {string} num
+ * @returns {string} num - same number, either with a decimal added to the end or not
+ */
+export const handleInputDecimal = (num) => {
+  // do nothing if we don't want to add a decimal point
+  if (num.length >= 10) return {};
+  if (num.includes(".")) return {};
+
+  const returnNum = num + ".";
+  return {
+    inputNum: returnNum,
+    display: returnNum,
+    lastInput: "decimal",
+  };
+};
+
+/**
  * @function handleInputNum
  * figures out what to do when the user presses one of the number keys on the calculator
  *
@@ -109,7 +116,7 @@ export const handleInputNum = ({ num, inputNum }) => {
     inputNum: returnValue,
     display: returnValue,
     lastInput: "num",
-  }
+  };
 };
 
 /**
@@ -302,11 +309,13 @@ export const squareRootCalculation = (inputNumString) => {
  */
 export const toggleNegative = (inputNumString) => {
   if (isNaN(inputNumString)) {
-    return { display: "ERR", inputNum: "ERR" }
+    return { display: "ERR", inputNum: "ERR" };
   } else {
     if (inputNumString === "0") return "-0";
     if (inputNumString === "-0") return "0";
-    const returnValue = processNumberForDisplay((0 - Number(inputNumString)).toString());
+    const returnValue = processNumberForDisplay(
+      (0 - Number(inputNumString)).toString()
+    );
     return { display: returnValue, inputNum: returnValue };
   }
 };
