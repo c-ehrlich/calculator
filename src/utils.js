@@ -439,15 +439,38 @@ export const squareRootCalculationMath = (inputNumString) => {
  * @param {string} inputNumString should represent a number
  * @returns {string} the opposite (negative) if the input is a valid number, ERR otherwise
  */
-export const toggleNegative = (inputNumString) => {
-  if (isNaN(inputNumString)) {
-    return { display: "ERR", inputNum: "ERR" };
-  } else {
-    if (inputNumString === "0") return "-0";
-    if (inputNumString === "-0") return "0";
+export const toggleNegative = ({ inputNum, result, lastInput }) => {
+  // TODO figure out what to do if one of the inputs is ERR (maybe just have a
+  // dedicated function we can call to set the calculator into an error state?)
+
+  // if the result is NOT 0 and the inputNum IS 0, return the negative of the result
+  if (
+    result !== "0" &&
+    inputNum === "0" &&
+    ["equals", "percent"].includes(lastInput)
+  ) {
     const returnValue = processNumberForDisplay(
-      (0 - Number(inputNumString)).toString()
+      (0 - Number(result)).toString()
     );
-    return { display: returnValue, inputNum: returnValue };
+    return {
+      inputNum: returnValue,
+      display: returnValue,
+      lastInput: "toggleNegative",
+    };
   }
+
+  if (isNaN(inputNum)) {
+    return { display: "ERR", inputNum: "ERR" };
+  }
+
+  if (inputNum === "0") return "-0";
+  if (inputNum === "-0") return "0";
+  const returnValue = processNumberForDisplay(
+    (0 - Number(inputNum)).toString()
+  );
+  return {
+    display: returnValue,
+    inputNum: returnValue,
+    lastInput: "toggleNegative",
+  };
 };

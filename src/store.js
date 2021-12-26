@@ -103,7 +103,7 @@ let useStore = (set) => ({
    * CE/C Button
    */
   inputClear: () => {
-    set((state) =>({
+    set((state) => ({
       ...handleInputClear({
         lastInput: state.lastInput,
       }),
@@ -251,9 +251,8 @@ let useStore = (set) => ({
         inputNum: state.inputNum,
         lastInput: state.lastInput,
         result: state.result,
-      })
-    })
-    );
+      }),
+    }));
   },
   inputPercent: () => {
     set((state) => ({
@@ -271,16 +270,17 @@ let useStore = (set) => ({
         currentCalc: state.currentCalc,
         lastInput: state.lastInput,
         result: state.result,
-      })
+      }),
     }));
   },
   inputNegative: () => {
-    set(
-      (state) =>
-        state.inputNum !== ("" && "0") && {
-          ...toggleNegative(state.inputNum),
-        }
-    );
+    set((state) => ({
+      ...toggleNegative({
+        inputNum: state.inputNum,
+        result: state.result,
+        lastInput: state.lastInput,
+      }),
+    }));
   },
 
   /*
@@ -295,16 +295,16 @@ let useStore = (set) => ({
         lastInput: state.lastInput,
         memory: state.memory,
         result: state.result,
-      })
+      }),
     })),
-    inputMPlus: () =>
+  inputMPlus: () =>
     set((state) => ({
       ...handleInputMPlus({
         inputNum: state.inputNum,
         lastInput: state.lastInput,
         memory: state.memory,
         result: state.result,
-      })
+      }),
     })),
   inputMRecall: () =>
     set((state) => ({
