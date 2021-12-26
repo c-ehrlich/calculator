@@ -189,12 +189,14 @@ export const performArithmeticOperationRegularMode = ({
     return {
       evalString: evalString.slice(0, -1).concat(operator),
       lastInput: operationToPerform,
+      displayLeftSide: displayOperator,
     };
   }
 
   if (lastInput === "equals" || lastInput === "percent") {
     return {
       evalString: result.concat(operator),
+      displayLeftSide: displayOperator,
     };
   }
 
