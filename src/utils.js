@@ -210,7 +210,9 @@ export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
     inputNum: "0",
     evalString: result,
     result: result,
+    display: result,
     displayLeftSide: "",
+    lastInput: "percent",
   };
 };
 

@@ -272,7 +272,6 @@ let useStore = (set) => ({
         evalString: state.evalString,
         sciModeOn: state.sciModeOn,
       }),
-      lastInput: "percent",
     }));
   },
   inputInverse: () => {
