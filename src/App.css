@@ -1,12 +1,23 @@
 body {
+  position: fixed;
+  left: 0;
+  top: 0;
   margin: 0px;
   padding: 0px;
+  width: 100vw;
   height: 100vh;
-  background-color: yellow;
   user-select: none;
+  overflow: scroll;
 }
 
 #root {
-  height: 100%;
-  background-color: orange;
+  position: fixed;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: scroll;
+  background-color: red;
 }

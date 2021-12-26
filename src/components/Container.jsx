@@ -1,15 +1,18 @@
 import styled from "styled-components";
-
 import pageBG from "../media/bg-2400.jpg";
 import calcBG from "../media/CalcBG.png";
 
+const padding = 16;
+
 const Background = styled.div`
-  height: 100%;
-  width: 100%;
+  height: calc(100vh - ${2*padding}px); /* compensate for margin */
+  width: calc(100vw - ${2*padding}px); /* compensate for margin */
+  overflow: scroll;
   display: flex;
   color: red;
-  align-items: center;
-  justify-content: center;
+  padding: ${padding}px;
+  /* align-items: center;
+  justify-content: center; */
   background: url(${pageBG}) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -32,6 +35,7 @@ const CalculatorOuterContainer = styled.div`
     rgba(33, 33, 33, 1) 54.5%
   );
   padding: 4px;
+  margin: auto;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   border-bottom-left-radius: 48px;
