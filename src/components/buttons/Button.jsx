@@ -14,8 +14,8 @@ const StyledButton = styled.button`
   font-family: "AGRegular";
   white-space: nowrap;
   border-radius: 50%;
-  box-shadow: ${"" /* !!!! the yellow buttons have their own shadows */} inset
-      17px 24px 40px -30px rgba(255, 255, 255, 0.4),
+  /* !!!! the yellow buttons have their own shadows */
+  box-shadow: inset 17px 24px 40px -30px rgba(255, 255, 255, 0.4),
     inset 6px 9px 5px -10px rgba(255, 255, 255, 0.3),
     4px 7px 7px rgba(0, 0, 0, 0.3), 1.5px 3px 7px rgba(0, 0, 0, 0.6);
   cursor: pointer;
@@ -25,8 +25,7 @@ const StyledButton = styled.button`
   &:hover {
     box-shadow: inset 17px 24px 40px -30px rgba(255, 255, 255, 0.4),
       inset 6px 9px 5px -10px rgba(255, 255, 255, 0.3),
-      4px 7px 7px rgba(0, 0, 0, 0.3), 1.5px 3px 7px rgba(0, 0, 0, 0.6),
-      0 0 15px -1px rgba(255, 255, 255, 0.7);
+      4px 7px 7px rgba(0, 0, 0, 0.3), 1.5px 3px 7px rgba(0, 0, 0, 0.6);
   }
 
   &.black {
@@ -35,10 +34,9 @@ const StyledButton = styled.button`
     font-size: 24px;
 
     &:active {
-      box-shadow: 0 0 15px -4px rgba(255, 255, 255, 0.7),
-        inset 7px 7px 20px rgba(0, 0, 0, 0.9),
+      box-shadow: inset 7px 7px 20px rgba(0, 0, 0, 0.9),
         inset -7px -7px 20px rgba(255, 255, 255, 0.4);
-      padding-top: 1.2px;
+      padding-top: 2.5px;
     }
   }
 
@@ -48,8 +46,7 @@ const StyledButton = styled.button`
     font-size: 17px;
 
     &:active {
-      box-shadow: 0 0 15px -4px rgba(255, 255, 255, 0.7),
-        inset 7px 7px 20px rgba(26, 9, 1, 0.9),
+      box-shadow: inset 7px 7px 20px rgba(26, 9, 1, 0.9),
         inset -7px -7px 20px rgba(255, 255, 255, 0.4);
       padding-top: 3px;
     }
@@ -61,8 +58,7 @@ const StyledButton = styled.button`
     font-size: 20px;
 
     &:active {
-      box-shadow: 0 0 15px -4px rgba(255, 255, 255, 0.7),
-        inset 7px 7px 20px rgba(0, 28, 12, 0.9),
+      box-shadow: inset 7px 7px 20px rgba(0, 28, 12, 0.9),
         inset -7px -7px 20px rgba(4, 145, 65, 0.5);
       padding-top: 2.5px;
     }
@@ -76,17 +72,9 @@ const StyledButton = styled.button`
       inset 6px 9px 5px -10px rgba(255, 255, 255, 0.5),
       4px 7px 7px rgba(0, 0, 0, 0.2), 1.5px 3px 7px rgba(0, 0, 0, 0.5);
 
-    &:hover {
-      box-shadow: 4px 7px 7px rgba(0, 0, 0, 0.2),
-        1.5px 3px 7px rgba(0, 0, 0, 0.5), 0 0 15px 0px rgba(255, 255, 255, 0.7),
-        inset 17px 24px 40px -30px rgba(255, 255, 255, 0.9),
-        inset 6px 9px 5px -10px rgba(255, 255, 255, 0.5);
-    }
-
     &:active {
-      box-shadow: 0 0 15px -4px rgba(255, 255, 255, 0.7),
-        inset 7px 7px 20px rgba(92, 60, 1, 0.8),
-        inset -7px -7px 25px rgba(255, 255, 255, 0.5);
+      box-shadow: inset 7px 7px 20px rgba(60, 30, 0, 0.7),
+        inset -7px -7px 25px rgba(255, 255, 255, 0.8);
       padding-top: 3px;
     }
   }
@@ -98,6 +86,7 @@ const Button = (props) => {
       id={props.passDownId}
       className={`${props.type}`}
       onClick={props.clickFn && props.clickFn}
+      ref={props.passdownRef}
     >
       {props.children}
     </StyledButton>
