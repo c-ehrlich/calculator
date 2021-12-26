@@ -305,7 +305,7 @@ let useStore = (set) => ({
     set(
       (state) =>
         state.inputNum !== ("" && "0") && {
-          inputNum: processNumberForDisplay(toggleNegative(state.inputNum)),
+          ...toggleNegative(state.inputNum),
         }
     );
   },

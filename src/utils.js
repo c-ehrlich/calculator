@@ -270,8 +270,8 @@ export const safeEval = (inputExpression) => {
     // eslint-disable-next-line no-eval
     const safeOutput = processNumberForDisplay(eval(safeInput).toString());
     return safeOutput;
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
     return "ERR";
   }
 };
@@ -302,10 +302,11 @@ export const squareRootCalculation = (inputNumString) => {
  */
 export const toggleNegative = (inputNumString) => {
   if (isNaN(inputNumString)) {
-    return "ERR";
+    return { display: "ERR", inputNum: "ERR" }
   } else {
     if (inputNumString === "0") return "-0";
     if (inputNumString === "-0") return "0";
-    return (0 - Number(inputNumString)).toString();
+    const returnValue = processNumberForDisplay((0 - Number(inputNumString)).toString());
+    return { display: returnValue, inputNum: returnValue };
   }
 };

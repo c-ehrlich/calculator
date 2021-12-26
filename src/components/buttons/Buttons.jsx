@@ -70,7 +70,6 @@ const Buttons = () => {
   const inputMClear = useStore((state) => state.inputMClear);
 
   const handleKeyDown = (e) => {
-    console.log(e);
     if (e.key.match(/\d/)) {
       inputNumber(e.key);
     } else {
