@@ -336,6 +336,7 @@ let useStore = (set) => ({
   inputMRecall: () =>
     set((state) => ({
       inputNum: state.memory,
+      display: state.memory,
       lastInput: "mrecall",
     })),
   inputMClear: () =>
