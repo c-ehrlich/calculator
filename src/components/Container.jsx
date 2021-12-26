@@ -5,8 +5,8 @@ import calcBG from "../media/CalcBG.png";
 const padding = 16;
 
 const Background = styled.div`
-  height: calc(100vh - ${2*padding}px); /* compensate for margin */
-  width: calc(100vw - ${2*padding}px); /* compensate for margin */
+  height: calc(100vh - ${padding * 2}px); /* compensate for padding */
+  width: calc(100vw - ${padding * 2}px); /* compensate for padding */
   overflow: scroll;
   display: flex;
   color: red;
