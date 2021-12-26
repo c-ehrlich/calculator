@@ -9,7 +9,7 @@ const StyledModalButton = styled.button`
 
 const ModalButton = (props) => {
   return (
-    <StyledModalButton onClick={props.openModal}>Open Modal</StyledModalButton>
+    <StyledModalButton onClick={props.openModal}>Info</StyledModalButton>
   );
 };
 

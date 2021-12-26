@@ -1,24 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
+const padding = 16;
+
 const FullScreenModalBackground = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: calc(100% - ${padding * 2}px); /* compensate for padding */
+  height: calc(100% - ${padding * 2}px); /* compensate for padding */
+  padding: ${padding}px;
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 10;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: scroll;
+  /* justify-content: center;
+  align-items: center; */
 `;
 
 const StyledFullScreenModal = styled.div`
+  margin: auto;
   border-radius: 8px;
   background-color: white;
   display: flex;
   padding: 16px;
+  overflow: scroll;
   flex-direction: column;
   width: 600px;
   max-width: 90%;
