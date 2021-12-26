@@ -3,6 +3,8 @@ import { devtools } from "zustand/middleware";
 
 import {
   handleInputDecimal,
+  handleInputMMinus,
+  handleInputMPlus,
   handleInputNum,
   handleInputPercent,
   performArithmeticOperationRegularMode,
@@ -313,25 +315,23 @@ let useStore = (set) => ({
    */
   memory: "0",
   haveMemory: false,
-  inputMPlus: () =>
-    set((state) => ({
-      memory: processNumberForDisplay(
-        (
-          Number(state.memory) +
-          Number(state.lastInput === "equals" ? state.result : state.inputNum)
-        ).toString()
-      ),
-      haveMemory: true,
-    })),
   inputMMinus: () =>
     set((state) => ({
-      memory: processNumberForDisplay(
-        (
-          Number(state.memory) -
-          Number(state.lastInput === "equals" ? state.result : state.inputNum)
-        ).toString()
-      ),
-      haveMemory: true,
+      ...handleInputMMinus({
+        inputNum: state.inputNum,
+        lastInput: state.lastInput,
+        memory: state.memory,
+        result: state.result,
+      })
+    })),
+    inputMPlus: () =>
+    set((state) => ({
+      ...handleInputMPlus({
+        inputNum: state.inputNum,
+        lastInput: state.lastInput,
+        memory: state.memory,
+        result: state.result,
+      })
     })),
   inputMRecall: () =>
     set((state) => ({

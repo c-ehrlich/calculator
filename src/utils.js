@@ -80,6 +80,52 @@ export const handleInputDecimal = (num) => {
 };
 
 /**
+ * @function handleInputMMinus
+ * attempts to subtrate the current input from memory
+ */
+export const handleInputMMinus = ({
+  inputNum,
+  lastInput,
+  memory,
+  result,
+}) => {
+  const returnValue = processNumberForDisplay(
+    (
+      Number(memory) -
+      Number(lastInput === "equals" ? result : inputNum)
+    ).toString()
+  )
+  return {
+    haveMemory: true,
+    memory: returnValue,
+    display: returnValue,
+  }
+}
+
+/**
+ * @function handleInputMPlus
+ * attempts to add the current input to the memory
+ */
+export const handleInputMPlus = ({
+  inputNum,
+  lastInput,
+  memory,
+  result,
+}) => {
+  const returnValue = processNumberForDisplay(
+    (
+      Number(memory) +
+      Number(lastInput === "equals" ? result : inputNum)
+    ).toString()
+  )
+  return {
+    haveMemory: true,
+    memory: returnValue,
+    display: returnValue,
+  }
+}
+
+/**
  * @function handleInputNum
  * figures out what to do when the user presses one of the number keys on the calculator
  *
