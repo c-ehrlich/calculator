@@ -371,6 +371,29 @@ export const performEqualsRegularMode = ({
 };
 
 /**
+ * @function performEqualsSciMode
+ * process the result and other necessary values when the calculator is in sci mode
+ */
+export const performEqualsSciMode = ({
+  evalString,
+  inputNum,
+  lastInput,
+}) => {
+  if (lastInput === "equals") return {}
+
+  const result = safeEval(evalString.concat(inputNum))
+
+  return {
+    result: result,
+    display: result,
+    evalString: "0",
+    inputNum: "",
+    lastInput: "equals",
+    displayLeftSide: "",
+  }
+}
+
+/**
  * @function processNumberForDisplay
  * takes a string that represents and integer or decimal number, and processes it
  * for display on the calculator screen. this means reducing it to a maximum of

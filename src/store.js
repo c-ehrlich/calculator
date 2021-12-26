@@ -12,7 +12,7 @@ import {
   handleInputSqrt,
   performArithmeticOperationRegularMode,
   performEqualsRegularMode,
-  safeEval,
+  performEqualsSciMode,
   toggleNegative,
 } from "./utils";
 
@@ -42,6 +42,7 @@ let useStore = (set) => ({
   powerOn: () => {
     set({
       power: true,
+      display: "0",
       displayLeftSide: "",
       currentCalc: "",
       inputNum: "0",
@@ -57,6 +58,7 @@ let useStore = (set) => ({
         set({
           currentCalc: 0,
           inputNum: 0,
+          display: "0",
           displayLeftSide: "",
           memory: "0",
           haveMemory: false,
@@ -83,6 +85,7 @@ let useStore = (set) => ({
       currentCalc: "0",
       inputNum: "0",
       result: "0",
+      display: "0",
       displayLeftSide: "",
       sciMode: true,
       evalString: "",
@@ -93,6 +96,7 @@ let useStore = (set) => ({
       currentCalc: "0",
       inputNum: "0",
       result: "0",
+      display: "0",
       displayLeftSide: "",
       sciMode: false,
       evalString: "",
@@ -235,11 +239,11 @@ let useStore = (set) => ({
     })),
   sciInputEquals: () =>
     set((state) => ({
-      result: safeEval(state.evalString + state.inputNum),
-      evalString: "0",
-      inputNum: "",
-      lastInput: "equals",
-      displayLeftSide: "",
+      ...performEqualsSciMode({
+        evalString: state.evalString,
+        inputNum: state.inputNum,
+        lastInput: state.lastInput,
+      })
     })),
 
   /*
