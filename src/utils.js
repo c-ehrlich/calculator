@@ -126,6 +126,43 @@ export const handleInputMPlus = ({
 }
 
 /**
+ * @function handleInputInverse
+ * gives an inverse of either the current input or the result, works
+ * in both regular and scientific mode
+ */
+export const handleInputInverse = ({
+  currentCalc,
+  inputNum,
+  lastInput,
+  result,
+}) => {
+  if (lastInput === "equals") {
+    const returnValue = processNumberForDisplay(1 / result);
+    return {
+      display: returnValue,
+      result: returnValue,
+    }
+  }
+
+  if (inputNum !== "" && inputNum !== "0") {
+    const returnValue = processNumberForDisplay(1 / inputNum);
+    return {
+      display: returnValue,
+      inputNum: returnValue,
+      currentCalc: inputNum, // what does this do?
+      lastInput: "sqrt",
+    }
+  } else {
+    const returnValue = processNumberForDisplay(1 / currentCalc);
+    return {
+      currentCalc: returnValue,
+      display: returnValue,
+      lastInput: "sqrt",
+    }
+  }
+}
+
+/**
  * @function handleInputNum
  * figures out what to do when the user presses one of the number keys on the calculator
  *

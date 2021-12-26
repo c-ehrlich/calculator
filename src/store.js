@@ -3,6 +3,7 @@ import { devtools } from "zustand/middleware";
 
 import {
   handleInputDecimal,
+  handleInputInverse,
   handleInputMMinus,
   handleInputMPlus,
   handleInputNum,
@@ -10,7 +11,6 @@ import {
   handleInputSqrt,
   performArithmeticOperationRegularMode,
   performEqualsRegularMode,
-  processNumberForDisplay,
   safeEval,
   toggleNegative,
 } from "./utils";
@@ -275,22 +275,14 @@ let useStore = (set) => ({
     }));
   },
   inputInverse: () => {
-    set((state) =>
-      state.lastInput === "equals"
-        ? {
-            result: processNumberForDisplay(1 / state.result),
-          }
-        : state.inputNum !== ("" && "0")
-        ? {
-            inputNum: processNumberForDisplay(1 / state.inputNum),
-            currentCalc: state.inputNum, // what does this do?
-            lastInput: "sqrt",
-          }
-        : {
-            currentCalc: processNumberForDisplay(1 / state.currentCalc),
-            lastInput: "sqrt",
-          }
-    );
+    set((state) => ({
+      ...handleInputInverse({
+        inputNum: state.inputNum,
+        currentCalc: state.currentCalc,
+        lastInput: state.lastInput,
+        result: state.result,
+      })
+    }));
   },
   inputNegative: () => {
     set(
