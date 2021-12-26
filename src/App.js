@@ -31,7 +31,7 @@ function App() {
           <InfoModal closeModal={closeModal} />
         </FullScreenModal>
       )}
-      <ModalButton openModal={openModal} />
+      {!modalOpen && <ModalButton openModal={openModal} />}
       <Container>
         <Logo />
         <Display />

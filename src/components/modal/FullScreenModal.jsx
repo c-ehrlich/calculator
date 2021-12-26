@@ -26,7 +26,8 @@ const StyledFullScreenModal = styled.div`
   padding: 16px;
   overflow: scroll;
   flex-direction: column;
-  width: 600px;
+  gap: 8px;
+  width: 400px;
   max-width: 90%;
 `;
 

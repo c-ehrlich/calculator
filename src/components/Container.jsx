@@ -11,8 +11,6 @@ const Background = styled.div`
   display: flex;
   color: red;
   padding: ${padding}px;
-  /* align-items: center;
-  justify-content: center; */
   background: url(${pageBG}) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;

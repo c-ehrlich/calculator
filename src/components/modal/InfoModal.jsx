@@ -10,15 +10,40 @@ const ModalParagraph = styled.div`
   font-family: "AGRegular";
 `;
 
+const ModalTable = styled.table`
+  max-width: 200px;
+  background-color: white;
+  border: 1px solid black;
+  border-collapse: collapse;
+  
+  & th {
+    border: 1px solid black;
+    border-bottom: 2px solid black;
+    padding: 4px;
+    font-family: "AGRegular";
+  }
+  & td {
+    border: 1px solid black;
+    padding: 4px;
+    font-family: "AGRegular";
+  }
+`;
+
+const ModalCloseButton = styled.button`
+  padding: 8px;
+  font-family: "AGRegular";
+  font-size: 16px;
+`;
+
 const InfoModal = ({ closeModal }) => {
   return (
     <>
       <ModalHeader>Calculator</ModalHeader>
-      <table>
+      <ModalTable>
         <thead>
           <tr>
             <th>Command</th>
-            <th>Key</th>
+            <th>Shortcut</th>
           </tr>
         </thead>
         <tbody>
@@ -71,10 +96,10 @@ const InfoModal = ({ closeModal }) => {
             <td>R</td>
           </tr>
         </tbody>
-      </table>
-      <ModalParagraph></ModalParagraph>
+      </ModalTable>
+      <ModalParagraph>The design of this app is a tribute to the iconic <a href="http://mycalcdb.free.fr/main.php?l=0&id=166">Braun ET66</a> Calculator.</ModalParagraph>
       <ModalParagraph>Click <a href="https://github.com/c-ehrlich/calculator/">here</a> to see the source code.</ModalParagraph>
-      <button onClick={closeModal}>close</button>
+      <ModalCloseButton onClick={closeModal}>close</ModalCloseButton>
     </>
   );
 };
