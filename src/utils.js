@@ -215,6 +215,41 @@ export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
 };
 
 /**
+ * @function handleInputSqrt
+ * handles Square Root input
+ */
+ export const handleInputSqrt = ({
+  inputNum,
+  lastInput,
+  result,
+}) => {
+  if (lastInput === "equals") {
+    const returnValue = squareRootCalculationMath(result);
+    return {
+      result: returnValue,
+      display: returnValue,
+      lastInput: "squareRoot",
+    };
+  }
+
+  const returnValue = squareRootCalculationMath(inputNum);
+  if (inputNum !== "" && inputNum !== "0") {
+    return {
+      inputNum: returnValue,
+      display: returnValue,
+      currentCalc: inputNum, // what does this do?
+      lastInput: "squareRoot",
+    };
+  } else {
+    return {
+      currentCalc: returnValue,
+      display: returnValue,
+      lastInput: "squareRoot", 
+    }
+  }
+}
+
+/**
  * @function performArithmeticOperationRegularMode
  * performarms a mathematical function in regular mode
  *
@@ -334,7 +369,7 @@ export const safeEval = (inputExpression) => {
 };
 
 /**
- * @function squareRootCalculation
+ * @function squareRootCalculationMath
  * takes as input a number in string format
  * outputs the square root of that number in string format, already ready
  * for calculator display
@@ -342,7 +377,7 @@ export const safeEval = (inputExpression) => {
  * @param {string} inputNumString
  * @returns {string}
  */
-export const squareRootCalculation = (inputNumString) => {
+ export const squareRootCalculationMath = (inputNumString) => {
   const num = Number(inputNumString);
   if (num < 0) return "ERR";
   const sqrt = Math.sqrt(num).toString();

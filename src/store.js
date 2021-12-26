@@ -7,11 +7,11 @@ import {
   handleInputMPlus,
   handleInputNum,
   handleInputPercent,
+  handleInputSqrt,
   performArithmeticOperationRegularMode,
   performEqualsRegularMode,
   processNumberForDisplay,
   safeEval,
-  squareRootCalculation,
   toggleNegative,
 } from "./utils";
 
@@ -256,21 +256,13 @@ let useStore = (set) => ({
    * In Place Calculations
    */
   inputSqrt: () => {
-    set((state) =>
-      state.lastInput === "equals"
-        ? {
-            result: squareRootCalculation(state.result),
-          }
-        : state.inputNum !== ("" && "0")
-        ? {
-            inputNum: squareRootCalculation(state.inputNum),
-            currentCalc: state.inputNum, // what does this do?
-            lastInput: "sqrt",
-          }
-        : {
-            currentCalc: squareRootCalculation(state.inputNum),
-            lastInput: "sqrt",
-          }
+    set((state) => ({
+      ...handleInputSqrt({
+        inputNum: state.inputNum,
+        lastInput: state.lastInput,
+        result: state.result,
+      })
+    })
     );
   },
   inputPercent: () => {
