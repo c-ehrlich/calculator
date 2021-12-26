@@ -193,7 +193,6 @@ let useStore = (set) => ({
         evalString: state.evalString,
         lastInput: state.lastInput,
       }),
-      lastInput: "equals",
     }));
   },
 

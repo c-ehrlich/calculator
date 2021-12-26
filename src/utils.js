@@ -237,6 +237,8 @@ export const performEqualsRegularMode = ({
     inputNum: "0",
     evalString: "",
     displayLeftSide: "",
+    display: result,
+    lastInput: "equals",
   };
 };
 
