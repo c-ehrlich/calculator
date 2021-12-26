@@ -39,27 +39,7 @@ const Display = () => {
   const displayLeftSide = useStore((state) => state.displayLeftSide);
   const haveMemory = useStore((state) => state.haveMemory);
 
-  const inputNum = useStore((state) => state.inputNum);
-  const result = useStore((state) => state.result);
-
-  const lastInput = useStore((state) => state.lastInput);
-  const calcError = useStore((state) => state.calcError);
-
-  const displayString = useMemo(() => {
-    if (calcError) return "ERR";
-
-    if (
-      ["plus", "minus", "times", "divideby", "equals", "percent"].indexOf(
-        lastInput
-      ) !== -1
-    ) {
-      return result;
-    }
-    return inputNum;
-    // if (inputNum === 0 && currentCalc === 0) return 0;
-    // if (inputNum === 0) return currentCalc;
-    // return truncateNumberForDisplay(inputNum)
-  }, [inputNum, calcError, result, lastInput]);
+  const display = useStore((state) => state.display);
 
   return (
     <DisplayBorder>
@@ -72,7 +52,7 @@ const Display = () => {
         </DisplaySmallText>
       </DisplayLeft>
       <DisplayMainText id="display" className={power && "power"}>
-        {displayString}
+        {display}
       </DisplayMainText>
     </DisplayBorder>
   );
