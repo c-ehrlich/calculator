@@ -12,7 +12,6 @@ const StyledModalButton = styled.button`
   font-size: 16px;
   border-radius: 50%;
   font-family: 'Cutive', monospace;
-  font-weight: 800;
   cursor: pointer;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.4);
 

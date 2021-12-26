@@ -100,6 +100,7 @@ const InfoModal = ({ closeModal }) => {
         </tbody>
       </ModalTable>
       <ModalParagraph>The design of this app is a tribute to the iconic <a href="http://mycalcdb.free.fr/main.php?l=0&id=166">Braun ET66</a> Calculator.</ModalParagraph>
+      <ModalParagraph>More information about <a href="https://www.reddit.com/r/howto/comments/gs9ad/til_how_to_use_the_memory_functions_on_a/">how the Memory buttons work</a></ModalParagraph>
       <ModalParagraph>Click <a href="https://github.com/c-ehrlich/calculator/">here</a> to see the source code.</ModalParagraph>
       <ModalCloseButton onClick={closeModal}>close</ModalCloseButton>
     </>
