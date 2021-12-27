@@ -322,6 +322,6 @@ let useStore = (set) => ({
     }),
 });
 
-useStore = devtools(useStore); // TEMP - remove in prod
+// useStore = devtools(useStore); // TEMP - remove in prod
 useStore = create(useStore);
 export default useStore;
