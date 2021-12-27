@@ -162,14 +162,12 @@ export const handleInputInverse = ({
       display: returnValue,
       inputNum: returnValue,
       currentCalc: inputNum, // what does this do?
-      lastInput: "sqrt",
     };
   } else {
     const returnValue = processNumberForDisplay(1 / currentCalc);
     return {
       currentCalc: returnValue,
       display: returnValue,
-      lastInput: "sqrt",
     };
   }
 };
@@ -181,7 +179,7 @@ export const handleInputInverse = ({
  * @param {*} param0
  * @returns
  */
-export const handleInputNum = ({ num, inputNum }) => {
+export const handleInputNum = ({ num, inputNum, lastInput }) => {
   const inputNumNumber = Number(inputNum);
   let returnValue = "";
 
@@ -205,12 +203,16 @@ export const handleInputNum = ({ num, inputNum }) => {
       returnValue = inputNum + num;
   }
 
-  console.log(returnValue);
-
   return {
     inputNum: returnValue,
     display: returnValue,
     lastInput: "num",
+    // we need to reset the calculator to initial state if the user inputs a number
+    // right after an equals sign, and we can't do it any earlier than this
+    ...(lastInput === "equals" || lastInput === "percent") && {
+      result: "0",
+      evalString: "",
+    },
   };
 };
 
@@ -270,12 +272,11 @@ export const handleInputPercent = ({ inputNum, evalString, sciModeOn }) => {
  * handles Square Root input
  */
 export const handleInputSqrt = ({ inputNum, lastInput, result }) => {
-  if (lastInput === "equals") {
+  if (lastInput === "equals" || lastInput === "percent") {
     const returnValue = squareRootCalculationMath(result);
     return {
       result: returnValue,
       display: returnValue,
-      lastInput: "squareRoot",
     };
   }
 
@@ -285,13 +286,11 @@ export const handleInputSqrt = ({ inputNum, lastInput, result }) => {
       inputNum: returnValue,
       display: returnValue,
       currentCalc: inputNum, // what does this do?
-      lastInput: "squareRoot",
     };
   } else {
     return {
       currentCalc: returnValue,
       display: returnValue,
-      lastInput: "squareRoot",
     };
   }
 };
@@ -374,14 +373,10 @@ export const performEqualsRegularMode = ({
  * @function performEqualsSciMode
  * process the result and other necessary values when the calculator is in sci mode
  */
-export const performEqualsSciMode = ({
-  evalString,
-  inputNum,
-  lastInput,
-}) => {
-  if (lastInput === "equals") return {}
+export const performEqualsSciMode = ({ evalString, inputNum, lastInput }) => {
+  if (lastInput === "equals") return {};
 
-  const result = safeEval(evalString.concat(inputNum))
+  const result = safeEval(evalString.concat(inputNum));
 
   return {
     result: result,
@@ -390,8 +385,8 @@ export const performEqualsSciMode = ({
     inputNum: "",
     lastInput: "equals",
     displayLeftSide: "",
-  }
-}
+  };
+};
 
 /**
  * @function processNumberForDisplay

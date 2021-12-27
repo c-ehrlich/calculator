@@ -122,6 +122,7 @@ let useStore = (set) => ({
       ...handleInputNum({
         num: number,
         inputNum: state.inputNum,
+        lastInput: state.lastInput,
       }),
     }));
   },
