@@ -35,6 +35,7 @@ const ModalTable = styled.table`
 
 const ModalCloseButton = styled.button`
   padding: 8px;
+  margin-top: 8px;
   font-family: "AGRegular";
   font-size: 16px;
 `;
@@ -104,10 +105,10 @@ const InfoModal = ({ closeModal }) => {
       <ModalParagraph>
         The design of this app is a tribute to the iconic Braun{" "}
         <a href="https://www.garmmen.com/static/9420/612cd27c85ba2dd568c2a71c.jpg">
-          Typ 4835
+          ET 55
         </a>{" "}
-        and <a href="http://mycalcdb.free.fr/main.php?l=0&id=166">ET66</a>{" "}
-        Calculators.
+        and <a href="http://mycalcdb.free.fr/main.php?l=0&id=166">ET 66</a>{" "}
+        calculators.
       </ModalParagraph>
       <ModalParagraph>
         More information about{" "}
