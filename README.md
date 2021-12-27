@@ -3,7 +3,7 @@
 
 ![Calculator Screenshot](https://user-images.githubusercontent.com/8353666/147464964-396d580d-abe5-4a3b-b4e4-ae47f750e54e.png)
 
-A calculator built in React, as a tribute to the iconic Braun ET55 and ET66 calculators.
+A calculator built in React, as a tribute to the iconic Braun ET55 and ET66 calculators. Key features include Regular and Scientific mode, Memory, and extensive styling and animation.
 
 ## Installation and Setup 
 
