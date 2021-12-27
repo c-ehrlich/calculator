@@ -209,10 +209,10 @@ export const handleInputNum = ({ num, inputNum, lastInput }) => {
     lastInput: "num",
     // we need to reset the calculator to initial state if the user inputs a number
     // right after an equals sign, and we can't do it any earlier than this
-    ...(lastInput === "equals" || lastInput === "percent") && {
+    ...((lastInput === "equals" || lastInput === "percent") && {
       result: "0",
       evalString: "",
-    },
+    }),
   };
 };
 
@@ -339,6 +339,34 @@ export const performArithmeticOperationRegularMode = ({
     inputNum: "0",
     lastInput: operationToPerform,
     displayLeftSide: displayOperator,
+  };
+};
+
+/**
+ * @function performArithmeticOperationSciMode
+ * handles input of an arithmetic operation in scientific mode
+ */
+export const performArithmeticOperationSciMode = ({
+  evalString,
+  inputNum,
+  lastInput,
+  operationToPerform,
+}) => {
+  //prettier-ignore
+  const newEvalString =
+    ["plus", "minus", "times", "divideby"].includes(lastInput)
+     ? evalString.slice(0, -1).concat(getArithmeticCharFromWord(operationToPerform))
+     : evalString !== "0" && evalString +
+       inputNum !== "0" && inputNum +
+       getArithmeticCharFromWord(operationToPerform);
+
+  return {
+    evalString: newEvalString,
+    inputNum: "0",
+    lastInput: operationToPerform,
+    displayLeftSide: getArithmeticDisplayCharFromWord(operationToPerform),
+    // don't change the display if the last input was also an arithmetic operator
+    ...(!["plus", "minus", "times", "divideby"].includes(lastInput) && {display: inputNum})
   };
 };
 

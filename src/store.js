@@ -11,6 +11,7 @@ import {
   handleInputPercent,
   handleInputSqrt,
   performArithmeticOperationRegularMode,
+  performArithmeticOperationSciMode,
   performEqualsRegularMode,
   performEqualsSciMode,
   toggleNegative,
@@ -200,43 +201,39 @@ let useStore = (set) => ({
    */
   sciInputPlus: () =>
     set((state) => ({
-      evalString:
-        (state.evalString !== "0" && state.evalString) +
-        (state.inputNum !== "0" && state.inputNum) +
-        "+",
-      inputNum: "0",
-      lastInput: "plus",
-      displayLeftSide: "+",
+      ...performArithmeticOperationSciMode({
+        evalString: state.evalString,
+        inputNum: state.inputNum,
+        lastInput: state.lastInput,
+        operationToPerform: "plus",
+      }),
     })),
   sciInputMinus: () =>
     set((state) => ({
-      evalString:
-        (state.evalString !== "0" && state.evalString) +
-        (state.inputNum !== "0" && state.inputNum) +
-        "-",
-      inputNum: "0",
-      lastInput: "minus",
-      displayLeftSide: "-",
+      ...performArithmeticOperationSciMode({
+        evalString: state.evalString,
+        inputNum: state.inputNum,
+        lastInput: state.lastInput,
+        operationToPerform: "minus",
+      }),
     })),
   sciInputTimes: () =>
     set((state) => ({
-      evalString:
-        (state.evalString !== "0" && state.evalString) +
-        (state.inputNum !== "0" && state.inputNum) +
-        "*",
-      inputNum: "0",
-      lastInput: "times",
-      displayLeftSide: "*",
+      ...performArithmeticOperationSciMode({
+        evalString: state.evalString,
+        inputNum: state.inputNum,
+        lastInput: state.lastInput,
+        operationToPerform: "times",
+      }),
     })),
   sciInputDivideBy: () =>
     set((state) => ({
-      evalString:
-        (state.evalString !== "0" && state.evalString) +
-        (state.inputNum !== "0" && state.inputNum) +
-        "/",
-      inputNum: "0",
-      lastInput: "divideby",
-      displayLeftSide: "/",
+      ...performArithmeticOperationSciMode({
+        evalString: state.evalString,
+        inputNum: state.inputNum,
+        lastInput: state.lastInput,
+        operationToPerform: "divideby",
+      }),
     })),
   sciInputEquals: () =>
     set((state) => ({
