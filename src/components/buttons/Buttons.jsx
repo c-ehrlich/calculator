@@ -16,6 +16,7 @@ import {
 import Button from "./Button";
 
 import plusMinusIcon from "../../media/PlusMinusIcon.svg";
+import { visuallyHidden } from "../../styles";
 
 const StyledButtons = styled.div`
   display: grid;
@@ -34,6 +35,12 @@ const WhiteDot = styled.div`
   border: none;
   background-color: white;
   border-radius: 50%;
+`;
+
+// Create elements that screen readers can see, but don't modify the visual
+// UI in any way
+const ForScreenReader = styled.div`
+  ${visuallyHidden}
 `;
 
 const Buttons = () => {
@@ -139,82 +146,96 @@ const Buttons = () => {
     <StyledButtons>
       <Button type="green" clickFn={inputMPlus}>
         <span>M +</span>
+        <ForScreenReader>Add to memory</ForScreenReader>
       </Button>
       <Button type="green" clickFn={inputMMinus}>
-        M –
+        <span>M –</span>
+        <ForScreenReader>Subtract from memory</ForScreenReader>
       </Button>
       <Button type="green" clickFn={inputMRecall}>
-        MR
+        <span>MR</span>
+        <ForScreenReader>Recall Memory</ForScreenReader>
       </Button>
       <Button type="green" clickFn={inputMClear}>
-        MC
+        <span>MC</span>
+        <ForScreenReader>Clear Memory</ForScreenReader>
       </Button>
       <Button type="green" clickFn={inputNegative}>
         <ButtonImage src={plusMinusIcon} alt="+/-" />
+        <ForScreenReader>Negative</ForScreenReader>
       </Button>
       <Button type="brown" clickFn={inputSqrt}>
         <FontAwesomeIcon icon={faSquareRootAlt} />
+        <ForScreenReader>Square Root</ForScreenReader>
       </Button>
       <Button type="black" clickFn={() => inputNumber(7)}>
-        7
+        <span>7</span>
       </Button>
       <Button type="black" clickFn={() => inputNumber(8)}>
-        8
+        <span>8</span>
       </Button>
       <Button type="black" clickFn={() => inputNumber(9)}>
-        9
+        <span>9</span>
       </Button>
       <Button type="brown" clickFn={inputDivideBy}>
         <FontAwesomeIcon icon={faDivide} />
+        <ForScreenReader>Divide</ForScreenReader>
       </Button>
       <Button type="brown" clickFn={inputPercent}>
         <FontAwesomeIcon icon={faPercent} />
+        <ForScreenReader>Percent</ForScreenReader>
       </Button>
       <Button type="black" clickFn={() => inputNumber(4)}>
-        4
+        <span>4</span>
       </Button>
       <Button type="black" clickFn={() => inputNumber(5)}>
-        5
+        <span>5</span>
       </Button>
       <Button type="black" clickFn={() => inputNumber(6)}>
-        6
+        <span>6</span>
       </Button>
       <Button type="brown" clickFn={inputTimes}>
         <FontAwesomeIcon icon={faTimes} />
+        <ForScreenReader>Multiply</ForScreenReader>
       </Button>
       <Button type="brown" clickFn={inputInverse}>
         <span>
           X<sup>-1</sup>
         </span>
+        <ForScreenReader>Inverse</ForScreenReader>
       </Button>
       <Button type="black" clickFn={() => inputNumber(1)}>
-        1
+        <span>1</span>
       </Button>
       <Button type="black" clickFn={() => inputNumber(2)}>
-        2
+        <span>2</span>
       </Button>
       <Button type="black" clickFn={() => inputNumber(3)}>
-        3
+        <span>3</span>
       </Button>
       <Button type="brown" clickFn={inputMinus}>
         <FontAwesomeIcon icon={faMinus} />
+        <ForScreenReader>Minus</ForScreenReader>
       </Button>
       <Button type="brown" clickFn={inputClear}>
         <span>CE</span>
         <span>C</span>
+        <ForScreenReader>Clear Input / Clear All</ForScreenReader>
       </Button>
       <Button type="black" clickFn={() => inputNumber(0)}>
-        0
+        <span>0</span>
       </Button>
-      {/* TODO put a circular div in here instead */}
       <Button type="brown" clickFn={inputDecimal}>
         <WhiteDot />
+        <ForScreenReader>Decimal Point</ForScreenReader>
       </Button>
       <Button type="yellow" clickFn={() => inputEquals()}>
         <FontAwesomeIcon icon={faEquals} />
+        <ForScreenReader>Equals</ForScreenReader>
       </Button>
       <Button type="brown" clickFn={inputPlus}>
         <FontAwesomeIcon icon={faPlus} />
+        <ForScreenReader>Plus</ForScreenReader>
       </Button>
     </StyledButtons>
   );
