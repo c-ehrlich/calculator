@@ -19,10 +19,10 @@ const StyledDisplay = styled.div`
   justify-content: flex-end;
   padding: 8px 24px;
 
-  border-top: 12px inset rgba(0, 0, 0, 0.9);
-  border-left: 8px inset rgba(0, 0, 0, 0.8);
-  border-bottom: 24px inset rgba(0, 0, 0, 0.7);
-  border-right: 8px inset rgba(0, 0, 0, 0.8);
+  border-top: 12px inset #0F100D;
+  border-left: 8px inset #1F201B;
+  border-bottom: 24px inset #2E3029;
+  border-right: 8px inset #1F201B;
 
   box-shadow: inset 0px 0px 5px -2px rgba(0, 0, 0, 0.9);
 `;
