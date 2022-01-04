@@ -1,5 +1,5 @@
-import React from "react";
 import styled from "styled-components";
+import { visuallyHidden } from "../../styles";
 
 const StyledModalButton = styled.button`
   background-color: rgba(255, 255, 255, 0.8);
@@ -11,7 +11,7 @@ const StyledModalButton = styled.button`
   height: 32px;
   font-size: 16px;
   border-radius: 50%;
-  font-family: 'Cutive', monospace;
+  font-family: "Cutive", monospace;
   cursor: pointer;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.4);
 
@@ -20,9 +20,18 @@ const StyledModalButton = styled.button`
   }
 `;
 
+// Create elements that screen readers can see, but don't modify the visual
+// UI in any way
+const ForScreenReader = styled.div`
+  ${visuallyHidden}
+`;
+
 const ModalButton = (props) => {
   return (
-    <StyledModalButton onClick={props.openModal}><span>i</span></StyledModalButton>
+    <StyledModalButton onClick={props.openModal}>
+      <span>i</span>
+      <ForScreenReader>Open Info Modal</ForScreenReader>
+    </StyledModalButton>
   );
 };
 

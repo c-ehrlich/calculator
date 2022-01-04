@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import useStore from "../../store";
 
-import { embossedTextSvg } from "../../styles";
+import { embossedTextSvg, visuallyHidden } from "../../styles";
 
 const PowerButtonArea = styled.div`
   display: flex;
@@ -61,6 +61,12 @@ const StyledPowerButton = styled.button`
   }
 `;
 
+// Create elements that screen readers can see, but don't modify the visual
+// UI in any way
+const ForScreenReader = styled.div`
+  ${visuallyHidden}
+`;
+
 const PowerButton = ({ onoff }) => {
   const powerOn = useStore((state) => state.powerOn);
   const powerOff = useStore((state) => state.powerOff);
@@ -70,7 +76,11 @@ const PowerButton = ({ onoff }) => {
       <StyledPowerButton
         onClick={onoff ? powerOn : powerOff}
         className={onoff ? "on" : "off"}
-      />
+      >
+        <ForScreenReader>
+          {onoff ? "Power On" : "Power Off"}
+        </ForScreenReader>
+      </StyledPowerButton>
       <PowerButtonBigDot className={onoff ? "on" : "off"} />
     </PowerButtonArea>
   );
