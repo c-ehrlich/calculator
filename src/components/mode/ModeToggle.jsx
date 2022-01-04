@@ -34,7 +34,7 @@ const VerticalSwitchLabel = styled.label`
   }
 
   &:focus-within {
-    outline: 1px dotted #212121;
+    outline: 2px solid rgb(80, 120, 255);
     outline: 5px auto -webkit-focus-ring-color;
   }
 `;
