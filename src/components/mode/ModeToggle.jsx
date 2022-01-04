@@ -2,9 +2,6 @@ import styled from "styled-components";
 import useStore from "../../store";
 
 const VerticalSwitch = styled.input`
-  ${"" /* display: none; */}
-  ${"" /* position: relative; */}
-  ${"" /* right: 20px; */}
   opacity: 50;
   width: 10;
   height: 10;
@@ -58,7 +55,6 @@ const VerticalSwitchToggle = styled.i`
     top: 28px;
   }
 
-  ${"" /* put a div in here? */}
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,10 +74,8 @@ const ModeToggle = () => {
 
   const toggleSciMode = (e) => {
     e.preventDefault();
-    sciMode
-      ? sciModeOff()
-      : sciModeOn();
-  }
+    sciMode ? sciModeOff() : sciModeOn();
+  };
 
   return (
     <div>
