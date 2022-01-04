@@ -117,8 +117,7 @@ const InfoModal = ({ closeModal }) => {
         </a>
       </ModalParagraph>
       <ModalParagraph>
-        Click <a href="https://github.com/c-ehrlich/calculator/">here</a> to see
-        the source code.
+        View the <a href="https://github.com/c-ehrlich/calculator/">source code</a>.
       </ModalParagraph>
       <ModalCloseButton onClick={closeModal}>close</ModalCloseButton>
     </>
