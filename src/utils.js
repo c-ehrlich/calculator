@@ -20,7 +20,6 @@
  * @function toggleNegative
  */
 
-
 /**
  * @function countDecimals
  * counts how many decimal places a number has
@@ -389,7 +388,9 @@ export const performArithmeticOperationSciMode = ({
     lastInput: operationToPerform,
     displayLeftSide: getArithmeticDisplayCharFromWord(operationToPerform),
     // don't change the display if the last input was also an arithmetic operator
-    ...(!["plus", "minus", "times", "divideby"].includes(lastInput) && {display: inputNum})
+    ...(!["plus", "minus", "times", "divideby"].includes(lastInput) && {
+      display: inputNum,
+    }),
   };
 };
 
@@ -474,7 +475,12 @@ export const processNumberForDisplay = (inputNumString) => {
 export const safeEval = (inputExpression) => {
   try {
     // eslint-disable-next-line no-useless-escape
-    const safeInput = inputExpression.replace(/[^\d.+\-\*\/]/g, "");
+    let safeInput = inputExpression.replace(/[^\d.+\-\*\/]/g, "");
+
+    // create a regex that matches two minus signs followed by a number
+    // and replaces it with one minus sign, followed by the remained in parentheses
+    safeInput = safeInput.replace(/-\s*-\s*(\d+)/g, "-(-$1)");
+
     // eslint-disable-next-line no-eval
     const safeOutput = processNumberForDisplay(eval(safeInput).toString());
     return safeOutput;
@@ -531,10 +537,8 @@ export const toggleNegative = ({ inputNum, result, lastInput }) => {
   if (isNaN(inputNum)) {
     return { display: "ERR", inputNum: "ERR" };
   }
-  
-  let returnValue = processNumberForDisplay(
-    (0 - Number(inputNum)).toString()
-  );
+
+  let returnValue = processNumberForDisplay((0 - Number(inputNum)).toString());
   // handle zero input
   if (inputNum === "0") returnValue = "-0";
   if (inputNum === "-0") returnValue = "0";
