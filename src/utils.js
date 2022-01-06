@@ -1,5 +1,28 @@
 /**
  * @function countDecimals
+ * @function getArithmeticCharFromWord
+ * @function getArithmeticDisplayCharFromWord
+ * @function handleInputClear
+ * @function handleInputDecimal
+ * @function handleInputMMinus
+ * @function handleInputMPlus
+ * @function handleInputInverse
+ * @function handleInputNum
+ * @function handleInputPercent
+ * @function handleInputSqrt
+ * @function performArithmeticOperationRegularMode
+ * @function performArithmeticOperationSciMode
+ * @function performEqualsRegularMode
+ * @function performEqualsSciMode
+ * @function processNumberForDisplay
+ * @function safeEval
+ * @function squareRootCalculationMath
+ * @function toggleNegative
+ */
+
+
+/**
+ * @function countDecimals
  * counts how many decimal places a number has
  *
  * @param {number} number
@@ -508,12 +531,14 @@ export const toggleNegative = ({ inputNum, result, lastInput }) => {
   if (isNaN(inputNum)) {
     return { display: "ERR", inputNum: "ERR" };
   }
-
-  if (inputNum === "0") return "-0";
-  if (inputNum === "-0") return "0";
-  const returnValue = processNumberForDisplay(
+  
+  let returnValue = processNumberForDisplay(
     (0 - Number(inputNum)).toString()
   );
+  // handle zero input
+  if (inputNum === "0") returnValue = "-0";
+  if (inputNum === "-0") returnValue = "0";
+
   return {
     display: returnValue,
     inputNum: returnValue,

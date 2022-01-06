@@ -1,4 +1,5 @@
 import create from "zustand";
+import { devtools } from "zustand/middleware";
 
 import {
   handleInputClear,
@@ -321,5 +322,6 @@ let useStore = (set) => ({
     }),
 });
 
+useStore = devtools(useStore);
 useStore = create(useStore);
 export default useStore;
