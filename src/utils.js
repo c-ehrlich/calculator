@@ -345,6 +345,8 @@ export const performArithmeticOperationRegularMode = ({
   if (lastInput === "equals" || lastInput === "percent") {
     return {
       evalString: result.concat(operator),
+      lastInput: operationToPerform,
+      display: result,
       displayLeftSide: displayOperator,
     };
   }
