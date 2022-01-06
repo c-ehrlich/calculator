@@ -111,13 +111,22 @@ const InfoModal = ({ closeModal }) => {
         calculators.
       </ModalParagraph>
       <ModalParagraph>
+        <div>REG mode uses Immediate Execution Logic:</div>
+        <div>1 + 2 * 3 = 9</div>
+      </ModalParagraph>
+      <ModalParagraph>
+        <div>SCI mode uses Formula/Expression Logic:</div>
+        <div>1 + 2 * 3 = 7</div>
+      </ModalParagraph>
+      <ModalParagraph>
         More information about{" "}
         <a href="https://www.reddit.com/r/howto/comments/gs9ad/til_how_to_use_the_memory_functions_on_a/">
           how the Memory buttons work
         </a>
       </ModalParagraph>
       <ModalParagraph>
-        View the <a href="https://github.com/c-ehrlich/calculator/">source code</a>.
+        View the{" "}
+        <a href="https://github.com/c-ehrlich/calculator/">source code</a>.
       </ModalParagraph>
       <ModalCloseButton onClick={closeModal}>close</ModalCloseButton>
     </>
