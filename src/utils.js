@@ -373,14 +373,27 @@ export const performArithmeticOperationSciMode = ({
   inputNum,
   lastInput,
   operationToPerform,
+  result,
 }) => {
   //prettier-ignore
-  const newEvalString =
-    ["plus", "minus", "times", "divideby"].includes(lastInput)
-     ? evalString.slice(0, -1).concat(getArithmeticCharFromWord(operationToPerform))
-     : evalString !== "0" && evalString +
-       inputNum !== "0" && inputNum +
-       getArithmeticCharFromWord(operationToPerform);
+  let newEvalString;
+  let newDisplay;
+
+  if (lastInput === "equals" || lastInput === "percent") {
+    newEvalString = result.concat(
+      getArithmeticCharFromWord(operationToPerform)
+    );
+    newDisplay = result;
+  } else if (["plus", "minus", "times", "divideby"].includes(lastInput)) {
+    newEvalString = evalString
+      .slice(0, -1)
+      .concat(getArithmeticCharFromWord(operationToPerform));
+  } else {
+    newEvalString =
+      evalString !== "0" &&
+      evalString + inputNum !== "0" &&
+      inputNum + getArithmeticCharFromWord(operationToPerform);
+  }
 
   return {
     evalString: newEvalString,
@@ -389,7 +402,7 @@ export const performArithmeticOperationSciMode = ({
     displayLeftSide: getArithmeticDisplayCharFromWord(operationToPerform),
     // don't change the display if the last input was also an arithmetic operator
     ...(!["plus", "minus", "times", "divideby"].includes(lastInput) && {
-      display: inputNum,
+      display: newDisplay ? newDisplay : inputNum,
     }),
   };
 };

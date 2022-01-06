@@ -206,6 +206,7 @@ let useStore = (set) => ({
         inputNum: state.inputNum,
         lastInput: state.lastInput,
         operationToPerform: "plus",
+        result: state.result,
       }),
     })),
   sciInputMinus: () =>
@@ -215,6 +216,7 @@ let useStore = (set) => ({
         inputNum: state.inputNum,
         lastInput: state.lastInput,
         operationToPerform: "minus",
+        result: state.result,
       }),
     })),
   sciInputTimes: () =>
@@ -224,6 +226,7 @@ let useStore = (set) => ({
         inputNum: state.inputNum,
         lastInput: state.lastInput,
         operationToPerform: "times",
+        result: state.result,
       }),
     })),
   sciInputDivideBy: () =>
@@ -233,6 +236,7 @@ let useStore = (set) => ({
         inputNum: state.inputNum,
         lastInput: state.lastInput,
         operationToPerform: "divideby",
+        result: state.result,
       }),
     })),
   sciInputEquals: () =>
