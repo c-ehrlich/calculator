@@ -392,9 +392,9 @@ export const performArithmeticOperationSciMode = ({
       .concat(getArithmeticCharFromWord(operationToPerform));
   } else {
     newEvalString =
-      evalString !== "0" &&
-      evalString + inputNum !== "0" &&
-      inputNum + getArithmeticCharFromWord(operationToPerform);
+      (evalString !== "0" && evalString) +
+      (inputNum !== "0" && inputNum) +
+      getArithmeticCharFromWord(operationToPerform);
   }
 
   return {
