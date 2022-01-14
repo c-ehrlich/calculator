@@ -1,7 +1,8 @@
 {
   "name": "04-calculator",
   "homepage": "https://c-ehrlich.github.io/calculator",
-  "version": "0.1.0",
+  "author": "Christopher Ehrlich",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
