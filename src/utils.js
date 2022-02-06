@@ -358,6 +358,7 @@ export const performArithmeticOperationRegularMode = ({
   evalString = newResult.concat(operator);
 
   return {
+    display: newResult,
     result: newResult,
     evalString: evalString,
     inputNum: "0",
